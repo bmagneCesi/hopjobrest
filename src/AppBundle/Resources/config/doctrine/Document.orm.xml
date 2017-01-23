@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Document" table="document">
+    <indexes>
+      <index name="fk_document_type_document1_idx" columns="type_document_id_type_document"/>
+      <index name="fk_document_utilisateur1_idx" columns="utilisateur_id_utilisateur"/>
+    </indexes>
+    <id name="idDocuments" type="integer" column="id_documents">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="libelle" type="string" column="libelle" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="repertoire" type="string" column="repertoire" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <many-to-one field="utilisateurUtilisateur" target-entity="Utilisateur" fetch="LAZY">
+      <join-columns>
+        <join-column name="utilisateur_id_utilisateur" referenced-column-name="id_utilisateur"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="typeDocumentTypeDocument" target-entity="TypeDocument" fetch="LAZY">
+      <join-columns>
+        <join-column name="type_document_id_type_document" referenced-column-name="id_type_document"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

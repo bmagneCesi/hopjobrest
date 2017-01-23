@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Ville" table="ville">
+    <id name="idVille" type="integer" column="id_ville">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="villeDepartement" type="string" column="ville_departement" length="3" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeSlug" type="string" column="ville_slug" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeNom" type="string" column="ville_nom" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeNomSimple" type="string" column="ville_nom_simple" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeNomReel" type="string" column="ville_nom_reel" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeNomSoundex" type="string" column="ville_nom_soundex" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeNomMetaphone" type="string" column="ville_nom_metaphone" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeCodePostal" type="string" column="ville_code_postal" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeCommune" type="string" column="ville_commune" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeCodeCommune" type="string" column="ville_code_commune" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeArrondissement" type="string" column="ville_arrondissement" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeCanton" type="string" column="ville_canton" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeAmdi" type="smallint" column="ville_amdi" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villePopulation2010" type="integer" column="ville_population_2010" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villePopulation1999" type="integer" column="ville_population_1999" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villePopulation2012" type="integer" column="ville_population_2012" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villeDensite2010" type="integer" column="ville_densite_2010" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villeSurface" type="float" column="ville_surface" precision="10" scale="0" nullable="true"/>
+    <field name="villeLongitudeDeg" type="float" column="ville_longitude_deg" precision="10" scale="0" nullable="true"/>
+    <field name="villeLatitudeDeg" type="float" column="ville_latitude_deg" precision="10" scale="0" nullable="true"/>
+    <field name="villeLongitudeGrd" type="string" column="ville_longitude_grd" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeLatitudeGrd" type="string" column="ville_latitude_grd" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeLongitudeDms" type="string" column="ville_longitude_dms" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeLatitudeDms" type="string" column="ville_latitude_dms" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeZmin" type="integer" column="ville_zmin" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="villeZmax" type="integer" column="ville_zmax" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Utilisateur" table="utilisateur">
+    <indexes>
+      <index name="fk_utilisateur_civilite_idx" columns="civilite_id_civilite"/>
+      <index name="fk_utilisateur_type_utilisateur1_idx" columns="type_utilisateur_id_type_utilisateur"/>
+      <index name="fk_utilisateur_ville1_idx" columns="ville_id_ville"/>
+      <index name="fk_utilisateur_metier1_idx" columns="metier_id_metier"/>
+      <index name="fk_utilisateur_domaine1_idx" columns="domaine_id_domaine"/>
+      <index name="ville_id_ville" columns="ville_id_ville"/>
+    </indexes>
+    <id name="idUtilisateur" type="integer" column="id_utilisateur">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenom" type="string" column="prenom" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mail" type="string" column="mail" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dateNaissance" type="date" column="date_naissance" nullable="true"/>
+    <field name="adresse" type="string" column="adresse" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="login" type="string" column="login" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="password" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="text" column="description" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="moyenneNotation" type="float" column="moyenne_notation" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="villeVille" target-entity="Ville" fetch="LAZY">
+      <join-columns>
+        <join-column name="ville_id_ville" referenced-column-name="id_ville"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="typeUtilisateurTypeUtilisateur" target-entity="TypeUtilisateur" fetch="LAZY">
+      <join-columns>
+        <join-column name="type_utilisateur_id_type_utilisateur" referenced-column-name="id_type_utilisateur"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="metierMetier" target-entity="Metier" fetch="LAZY">
+      <join-columns>
+        <join-column name="metier_id_metier" referenced-column-name="id_metier"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="domaineDomaine" target-entity="Domaine" fetch="LAZY">
+      <join-columns>
+        <join-column name="domaine_id_domaine" referenced-column-name="id_domaine"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="civiliteCivilite" target-entity="Civilite" fetch="LAZY">
+      <join-columns>
+        <join-column name="civilite_id_civilite" referenced-column-name="id_civilite"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

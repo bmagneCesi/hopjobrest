@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Notation" table="notation">
+    <indexes>
+      <index name="fk_notation_utilisateur1_idx" columns="utilisateur_id_utilisateur"/>
+    </indexes>
+    <id name="idNotation" type="integer" column="id_notation">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="commentaire" type="text" column="commentaire" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="note" type="integer" column="note" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="utilisateurUtilisateur" target-entity="Utilisateur" fetch="LAZY">
+      <join-columns>
+        <join-column name="utilisateur_id_utilisateur" referenced-column-name="id_utilisateur"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

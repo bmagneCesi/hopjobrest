@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\DemandeService" table="demande_service">
+    <indexes>
+      <index name="fk_demande_service_activite1_idx" columns="activite_id_activite"/>
+      <index name="fk_demande_service_utilisateur1_idx" columns="utilisateur_id_utilisateur"/>
+      <index name="fk_demande_service_annonce1_idx" columns="annonce_id_annonce"/>
+    </indexes>
+    <id name="idDemandeService" type="integer" column="id_demande_service">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="duree" type="integer" column="duree" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tauxHoraire" type="integer" column="taux_horaire" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="total" type="integer" column="total" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateDebut" type="date" column="date_debut" nullable="true"/>
+    <field name="dateFin" type="date" column="date_fin" nullable="true"/>
+    <many-to-one field="utilisateurUtilisateur" target-entity="Utilisateur" fetch="LAZY">
+      <join-columns>
+        <join-column name="utilisateur_id_utilisateur" referenced-column-name="id_utilisateur"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="annonceAnnonce" target-entity="Annonce" fetch="LAZY">
+      <join-columns>
+        <join-column name="annonce_id_annonce" referenced-column-name="id_annonce"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="activiteActivite" target-entity="Activite" fetch="LAZY">
+      <join-columns>
+        <join-column name="activite_id_activite" referenced-column-name="id_activite"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
