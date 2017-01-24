@@ -314,4 +314,61 @@ if (empty($utilisateur)) {
   return new View("deleted successfully", Response::HTTP_OK);
  }
 
+ /**
+     * Recuperer toutes les missions, annonces qu'un utilisateur va devoir réaliser
+     * @Route("missions/{idUtilisateur}",requirements={"idUtilisateur" = "\d+"}, name="idUtilisateur")
+     * @Method({"GET"})
+     */
+    public function getMissionsByUserAction($idUtilisateur,Request $request)
+    {
+    $em = $this->getDoctrine()->getManager();
+    $utilisateur = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('idUtilisateur' => $idUtilisateur ));
+        $annonce = $em->getRepository("AppBundle:Annonce")->findOneBy(array('idAnnonce' => $utilisateur ));
+        $reponse = $em->getRepository("AppBundle:ReponseAnnonce")->findOneBy(array('idReponseAnnonce' => $annonce ));
+
+        if (empty($reponse)) {
+            return new JsonResponse(['message' => 'Missions not found'], Response::HTTP_NOT_FOUND);
+        }
+            $formatted[] = [
+               'idUtilisateur' => $utilisateur->getIdUtilisateur(),
+               'nom' => $utilisateur->getNom(),
+               'prenom' => $utilisateur->getPrenom(),
+               'mail' => $utilisateur->getMail(),
+               'dateNaissance' => $utilisateur->getDateNaissance(),
+               'adresse' => $utilisateur->getAdresse(),
+               'login' => $utilisateur->getLogin(),
+               'description' => $utilisateur->getDescription(),
+               'moyenneNotation' => $utilisateur->getMoyenneNotation(),
+               'civiliteIdCivilite' => $utilisateur->getCiviliteIdCivilite(),
+               'typeUtilisateurIdTypeUtilisateur' => $utilisateur->getTypeUtilisateurIdTypeUtilisateur(),
+               'villeIdVille' => $utilisateur->getVilleIdVille(),
+               'metierIdMetier' => $utilisateur->getMetierIdMetier(),
+               'domaineIdDomaine' => $utilisateur->getDomaineIdDomaine(),
+               'idAnnonce' => $annonce->getIdAnnonce(),
+               'titre' => $annonce->getTitre(),
+               'nbPersonnes' => $annonce->getNbPersonnes(),
+               'vehicule' => $annonce->getVehicule(),
+               'dateFixe' => $annonce->getDateFixe(),
+               'dateLimite' => $annonce->getDateLimite(),
+               'prixTotal' => $annonce->getPrixTotal(),
+               'telephone' => $annonce->getTelephone(),
+               'villeVille' => $annonce->getVilleVille()->getIdVille(),
+               'utilisateurUtilisateur' => $annonce->getUtilisateurUtilisateur()->getIdUtilisateur(),
+               'typeVehiculeTypeVehicule' => $annonce->getTypeVehiculeTypeVehicule()->getIdTypeVehicule(),
+               'horaireHoraire' => $annonce->getHoraireHoraire()->getIdHoraire(),
+               'code' => $reponse->getCode(),
+               'commentaire' => $reponse->getCommentaire(),
+               'idReponseAnnonce' => $reponse->getIdReponseAnnonce(),
+               'statutPaiement' => $reponse->getStatutPaiement(),
+               'validation' => $reponse->getValidation(),
+               'annonceIdAnnonce' => $reponse->getAnnonceIdAnnonce(),
+               'utilisateurIdUtilisateur' => $reponse->getUtilisateurIdUtilisateur(),
+               'utilisateurIdUtilisateur1' => $reponse->getUtilisateurIdUtilisateur1(),
+
+                      
+            ];
+        
+        return new JsonResponse($formatted);
+    }
+
 }
