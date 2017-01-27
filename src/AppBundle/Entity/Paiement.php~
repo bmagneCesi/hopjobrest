@@ -7,38 +7,43 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Paiement
  *
- * @ORM\Table(name="paiement", indexes={@ORM\Index(name="fk_paiement_utilisateur1_idx", columns={"utilisateur_id_utilisateur"})})
- * @ORM\Entity
+ * @ORM\Table(name="paiement")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PaiementRepository")
  */
 class Paiement
 {
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="effectue", type="boolean", nullable=true)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="effectue", type="boolean")
      */
     private $effectue;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_paiement", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idPaiement;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur;
+
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur", referencedColumnName="id_utilisateur")
-     * })
+     * @return int
      */
-    private $utilisateurUtilisateur;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set effectue
@@ -57,44 +62,11 @@ class Paiement
     /**
      * Get effectue
      *
-     * @return boolean
+     * @return bool
      */
     public function getEffectue()
     {
         return $this->effectue;
     }
-
-    /**
-     * Get idPaiement
-     *
-     * @return integer
-     */
-    public function getIdPaiement()
-    {
-        return $this->idPaiement;
-    }
-
-    /**
-     * Set utilisateurUtilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
-     *
-     * @return Paiement
-     */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
-    {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateurUtilisateur
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getUtilisateurUtilisateur()
-    {
-        return $this->utilisateurUtilisateur;
-    }
 }
+

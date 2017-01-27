@@ -64,10 +64,10 @@ class TypeUtilisateur extends \AppBundle\Entity\TypeUtilisateur implements \Doct
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'idTypeUtilisateur'];
+            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'libelle'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'idTypeUtilisateur'];
+        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\TypeUtilisateur' . "\0" . 'libelle'];
     }
 
     /**
@@ -176,6 +176,21 @@ class TypeUtilisateur extends \AppBundle\Entity\TypeUtilisateur implements \Doct
     /**
      * {@inheritDoc}
      */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setLibelle($libelle)
     {
 
@@ -193,21 +208,6 @@ class TypeUtilisateur extends \AppBundle\Entity\TypeUtilisateur implements \Doct
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLibelle', []);
 
         return parent::getLibelle();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdTypeUtilisateur()
-    {
-        if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdTypeUtilisateur();
-        }
-
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdTypeUtilisateur', []);
-
-        return parent::getIdTypeUtilisateur();
     }
 
 }

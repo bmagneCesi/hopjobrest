@@ -8,782 +8,618 @@ use Doctrine\ORM\Mapping as ORM;
  * Ville
  *
  * @ORM\Table(name="ville")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VilleRepository")
  */
 class Ville
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="id_ville", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="ville")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="ville")
      */
-    private $idVille;
-
-
+    private $id;
 
     /**
-     * Get idVille
+     * @var string
      *
-     * @return integer
+     * @ORM\Column(name="departement", type="string", length=3)
      */
-    public function getIdVille()
-    {
-        return $this->idVille;
-    }
-    /**
-     * @var string
-     */
-    private $villeDepartement;
+    private $departement;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
      */
-    private $villeSlug;
+    private $slug;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $villeNom;
+    private $nom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nom_simple", type="string", length=255)
      */
-    private $villeNomSimple;
+    private $nomSimple;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nom_reel", type="string", length=255)
      */
-    private $villeNomReel;
+    private $nomReel;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nom_soundex", type="string", length=255)
      */
-    private $villeNomSoundex;
+    private $nomSoundex;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="code_postal", type="string", length=255)
      */
-    private $villeNomMetaphone;
+    private $codePostal;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="commune", type="string", length=255)
      */
-    private $villeCodePostal;
+    private $commune;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="code_commune", type="string", length=255)
      */
-    private $villeCommune;
+    private $codeCommune;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="arrondissement", type="string", length=255)
      */
-    private $villeCodeCommune;
+    private $arrondissement;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="canton", type="string", length=255)
      */
-    private $villeArrondissement;
+    private $canton;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="amdi", type="string", length=255)
      */
-    private $villeCanton;
-
-    /**
-     * @var integer
-     */
-    private $villeAmdi;
-
-    /**
-     * @var integer
-     */
-    private $villePopulation2010;
-
-    /**
-     * @var integer
-     */
-    private $villePopulation1999;
-
-    /**
-     * @var integer
-     */
-    private $villePopulation2012;
-
-    /**
-     * @var integer
-     */
-    private $villeDensite2010;
+    private $amdi;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="longitude_deg", type="float")
      */
-    private $villeSurface;
+    private $longitudeDeg;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="latitude_deg", type="float")
      */
-    private $villeLongitudeDeg;
-
-    /**
-     * @var float
-     */
-    private $villeLatitudeDeg;
+    private $latitudeDeg;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="longitude_grd", type="string", length=255)
      */
-    private $villeLongitudeGrd;
+    private $longitudeGrd;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="latitude_grd", type="string", length=255)
      */
-    private $villeLatitudeGrd;
+    private $latitudeGrd;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="longitude_dms", type="string", length=255)
      */
-    private $villeLongitudeDms;
+    private $longitudeDms;
 
     /**
      * @var string
-     */
-    private $villeLatitudeDms;
-
-    /**
-     * @var integer
-     */
-    private $villeZmin;
-
-    /**
-     * @var integer
-     */
-    private $villeZmax;
-
-
-    /**
-     * Set villeDepartement
      *
-     * @param string $villeDepartement
+     * @ORM\Column(name="latitude_dms", type="string", length=255)
+     */
+    private $latitudeDms;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="zmin", type="integer")
+     */
+    private $zmin;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set departement
+     *
+     * @param string $departement
      *
      * @return Ville
      */
-    public function setVilleDepartement($villeDepartement)
+    public function setDepartement($departement)
     {
-        $this->villeDepartement = $villeDepartement;
+        $this->departement = $departement;
 
         return $this;
     }
 
     /**
-     * Get villeDepartement
+     * Get departement
      *
      * @return string
      */
-    public function getVilleDepartement()
+    public function getDepartement()
     {
-        return $this->villeDepartement;
+        return $this->departement;
     }
 
     /**
-     * Set villeSlug
+     * Set slug
      *
-     * @param string $villeSlug
+     * @param string $slug
      *
      * @return Ville
      */
-    public function setVilleSlug($villeSlug)
+    public function setSlug($slug)
     {
-        $this->villeSlug = $villeSlug;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * Get villeSlug
+     * Get slug
      *
      * @return string
      */
-    public function getVilleSlug()
+    public function getSlug()
     {
-        return $this->villeSlug;
+        return $this->slug;
     }
 
     /**
-     * Set villeNom
+     * Set nom
      *
-     * @param string $villeNom
+     * @param string $nom
      *
      * @return Ville
      */
-    public function setVilleNom($villeNom)
+    public function setNom($nom)
     {
-        $this->villeNom = $villeNom;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get villeNom
+     * Get nom
      *
      * @return string
      */
-    public function getVilleNom()
+    public function getNom()
     {
-        return $this->villeNom;
+        return $this->nom;
     }
 
     /**
-     * Set villeNomSimple
+     * Set nomSimple
      *
-     * @param string $villeNomSimple
+     * @param string $nomSimple
      *
      * @return Ville
      */
-    public function setVilleNomSimple($villeNomSimple)
+    public function setNomSimple($nomSimple)
     {
-        $this->villeNomSimple = $villeNomSimple;
+        $this->nomSimple = $nomSimple;
 
         return $this;
     }
 
     /**
-     * Get villeNomSimple
+     * Get nomSimple
      *
      * @return string
      */
-    public function getVilleNomSimple()
+    public function getNomSimple()
     {
-        return $this->villeNomSimple;
+        return $this->nomSimple;
     }
 
     /**
-     * Set villeNomReel
+     * Set nomReel
      *
-     * @param string $villeNomReel
+     * @param string $nomReel
      *
      * @return Ville
      */
-    public function setVilleNomReel($villeNomReel)
+    public function setNomReel($nomReel)
     {
-        $this->villeNomReel = $villeNomReel;
+        $this->nomReel = $nomReel;
 
         return $this;
     }
 
     /**
-     * Get villeNomReel
+     * Get nomReel
      *
      * @return string
      */
-    public function getVilleNomReel()
+    public function getNomReel()
     {
-        return $this->villeNomReel;
+        return $this->nomReel;
     }
 
     /**
-     * Set villeNomSoundex
+     * Set nomSoundex
      *
-     * @param string $villeNomSoundex
+     * @param string $nomSoundex
      *
      * @return Ville
      */
-    public function setVilleNomSoundex($villeNomSoundex)
+    public function setNomSoundex($nomSoundex)
     {
-        $this->villeNomSoundex = $villeNomSoundex;
+        $this->nomSoundex = $nomSoundex;
 
         return $this;
     }
 
     /**
-     * Get villeNomSoundex
+     * Get nomSoundex
      *
      * @return string
      */
-    public function getVilleNomSoundex()
+    public function getNomSoundex()
     {
-        return $this->villeNomSoundex;
+        return $this->nomSoundex;
     }
 
     /**
-     * Set villeNomMetaphone
+     * Set codePostal
      *
-     * @param string $villeNomMetaphone
+     * @param string $codePostal
      *
      * @return Ville
      */
-    public function setVilleNomMetaphone($villeNomMetaphone)
+    public function setCodePostal($codePostal)
     {
-        $this->villeNomMetaphone = $villeNomMetaphone;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get villeNomMetaphone
+     * Get codePostal
      *
      * @return string
      */
-    public function getVilleNomMetaphone()
+    public function getCodePostal()
     {
-        return $this->villeNomMetaphone;
+        return $this->codePostal;
     }
 
     /**
-     * Set villeCodePostal
+     * Set commune
      *
-     * @param string $villeCodePostal
+     * @param string $commune
      *
      * @return Ville
      */
-    public function setVilleCodePostal($villeCodePostal)
+    public function setCommune($commune)
     {
-        $this->villeCodePostal = $villeCodePostal;
+        $this->commune = $commune;
 
         return $this;
     }
 
     /**
-     * Get villeCodePostal
+     * Get commune
      *
      * @return string
      */
-    public function getVilleCodePostal()
+    public function getCommune()
     {
-        return $this->villeCodePostal;
+        return $this->commune;
     }
 
     /**
-     * Set villeCommune
+     * Set codeCommune
      *
-     * @param string $villeCommune
+     * @param string $codeCommune
      *
      * @return Ville
      */
-    public function setVilleCommune($villeCommune)
+    public function setCodeCommune($codeCommune)
     {
-        $this->villeCommune = $villeCommune;
+        $this->codeCommune = $codeCommune;
 
         return $this;
     }
 
     /**
-     * Get villeCommune
+     * Get codeCommune
      *
      * @return string
      */
-    public function getVilleCommune()
+    public function getCodeCommune()
     {
-        return $this->villeCommune;
+        return $this->codeCommune;
     }
 
     /**
-     * Set villeCodeCommune
+     * Set arrondissement
      *
-     * @param string $villeCodeCommune
+     * @param string $arrondissement
      *
      * @return Ville
      */
-    public function setVilleCodeCommune($villeCodeCommune)
+    public function setArrondissement($arrondissement)
     {
-        $this->villeCodeCommune = $villeCodeCommune;
+        $this->arrondissement = $arrondissement;
 
         return $this;
     }
 
     /**
-     * Get villeCodeCommune
+     * Get arrondissement
      *
      * @return string
      */
-    public function getVilleCodeCommune()
+    public function getArrondissement()
     {
-        return $this->villeCodeCommune;
+        return $this->arrondissement;
     }
 
     /**
-     * Set villeArrondissement
+     * Set canton
      *
-     * @param string $villeArrondissement
+     * @param string $canton
      *
      * @return Ville
      */
-    public function setVilleArrondissement($villeArrondissement)
+    public function setCanton($canton)
     {
-        $this->villeArrondissement = $villeArrondissement;
+        $this->canton = $canton;
 
         return $this;
     }
 
     /**
-     * Get villeArrondissement
+     * Get canton
      *
      * @return string
      */
-    public function getVilleArrondissement()
+    public function getCanton()
     {
-        return $this->villeArrondissement;
+        return $this->canton;
     }
 
     /**
-     * Set villeCanton
+     * Set amdi
      *
-     * @param string $villeCanton
+     * @param string $amdi
      *
      * @return Ville
      */
-    public function setVilleCanton($villeCanton)
+    public function setAmdi($amdi)
     {
-        $this->villeCanton = $villeCanton;
+        $this->amdi = $amdi;
 
         return $this;
     }
 
     /**
-     * Get villeCanton
+     * Get amdi
      *
      * @return string
      */
-    public function getVilleCanton()
+    public function getAmdi()
     {
-        return $this->villeCanton;
+        return $this->amdi;
     }
 
     /**
-     * Set villeAmdi
+     * Set longitudeDeg
      *
-     * @param integer $villeAmdi
+     * @param float $longitudeDeg
      *
      * @return Ville
      */
-    public function setVilleAmdi($villeAmdi)
+    public function setLongitudeDeg($longitudeDeg)
     {
-        $this->villeAmdi = $villeAmdi;
+        $this->longitudeDeg = $longitudeDeg;
 
         return $this;
     }
 
     /**
-     * Get villeAmdi
-     *
-     * @return integer
-     */
-    public function getVilleAmdi()
-    {
-        return $this->villeAmdi;
-    }
-
-    /**
-     * Set villePopulation2010
-     *
-     * @param integer $villePopulation2010
-     *
-     * @return Ville
-     */
-    public function setVillePopulation2010($villePopulation2010)
-    {
-        $this->villePopulation2010 = $villePopulation2010;
-
-        return $this;
-    }
-
-    /**
-     * Get villePopulation2010
-     *
-     * @return integer
-     */
-    public function getVillePopulation2010()
-    {
-        return $this->villePopulation2010;
-    }
-
-    /**
-     * Set villePopulation1999
-     *
-     * @param integer $villePopulation1999
-     *
-     * @return Ville
-     */
-    public function setVillePopulation1999($villePopulation1999)
-    {
-        $this->villePopulation1999 = $villePopulation1999;
-
-        return $this;
-    }
-
-    /**
-     * Get villePopulation1999
-     *
-     * @return integer
-     */
-    public function getVillePopulation1999()
-    {
-        return $this->villePopulation1999;
-    }
-
-    /**
-     * Set villePopulation2012
-     *
-     * @param integer $villePopulation2012
-     *
-     * @return Ville
-     */
-    public function setVillePopulation2012($villePopulation2012)
-    {
-        $this->villePopulation2012 = $villePopulation2012;
-
-        return $this;
-    }
-
-    /**
-     * Get villePopulation2012
-     *
-     * @return integer
-     */
-    public function getVillePopulation2012()
-    {
-        return $this->villePopulation2012;
-    }
-
-    /**
-     * Set villeDensite2010
-     *
-     * @param integer $villeDensite2010
-     *
-     * @return Ville
-     */
-    public function setVilleDensite2010($villeDensite2010)
-    {
-        $this->villeDensite2010 = $villeDensite2010;
-
-        return $this;
-    }
-
-    /**
-     * Get villeDensite2010
-     *
-     * @return integer
-     */
-    public function getVilleDensite2010()
-    {
-        return $this->villeDensite2010;
-    }
-
-    /**
-     * Set villeSurface
-     *
-     * @param float $villeSurface
-     *
-     * @return Ville
-     */
-    public function setVilleSurface($villeSurface)
-    {
-        $this->villeSurface = $villeSurface;
-
-        return $this;
-    }
-
-    /**
-     * Get villeSurface
+     * Get longitudeDeg
      *
      * @return float
      */
-    public function getVilleSurface()
+    public function getLongitudeDeg()
     {
-        return $this->villeSurface;
+        return $this->longitudeDeg;
     }
 
     /**
-     * Set villeLongitudeDeg
+     * Set latitudeDeg
      *
-     * @param float $villeLongitudeDeg
+     * @param float $latitudeDeg
      *
      * @return Ville
      */
-    public function setVilleLongitudeDeg($villeLongitudeDeg)
+    public function setLatitudeDeg($latitudeDeg)
     {
-        $this->villeLongitudeDeg = $villeLongitudeDeg;
+        $this->latitudeDeg = $latitudeDeg;
 
         return $this;
     }
 
     /**
-     * Get villeLongitudeDeg
+     * Get latitudeDeg
      *
      * @return float
      */
-    public function getVilleLongitudeDeg()
+    public function getLatitudeDeg()
     {
-        return $this->villeLongitudeDeg;
+        return $this->latitudeDeg;
     }
 
     /**
-     * Set villeLatitudeDeg
+     * Set longitudeGrd
      *
-     * @param float $villeLatitudeDeg
+     * @param string $longitudeGrd
      *
      * @return Ville
      */
-    public function setVilleLatitudeDeg($villeLatitudeDeg)
+    public function setLongitudeGrd($longitudeGrd)
     {
-        $this->villeLatitudeDeg = $villeLatitudeDeg;
+        $this->longitudeGrd = $longitudeGrd;
 
         return $this;
     }
 
     /**
-     * Get villeLatitudeDeg
-     *
-     * @return float
-     */
-    public function getVilleLatitudeDeg()
-    {
-        return $this->villeLatitudeDeg;
-    }
-
-    /**
-     * Set villeLongitudeGrd
-     *
-     * @param string $villeLongitudeGrd
-     *
-     * @return Ville
-     */
-    public function setVilleLongitudeGrd($villeLongitudeGrd)
-    {
-        $this->villeLongitudeGrd = $villeLongitudeGrd;
-
-        return $this;
-    }
-
-    /**
-     * Get villeLongitudeGrd
+     * Get longitudeGrd
      *
      * @return string
      */
-    public function getVilleLongitudeGrd()
+    public function getLongitudeGrd()
     {
-        return $this->villeLongitudeGrd;
+        return $this->longitudeGrd;
     }
 
     /**
-     * Set villeLatitudeGrd
+     * Set latitudeGrd
      *
-     * @param string $villeLatitudeGrd
+     * @param string $latitudeGrd
      *
      * @return Ville
      */
-    public function setVilleLatitudeGrd($villeLatitudeGrd)
+    public function setLatitudeGrd($latitudeGrd)
     {
-        $this->villeLatitudeGrd = $villeLatitudeGrd;
+        $this->latitudeGrd = $latitudeGrd;
 
         return $this;
     }
 
     /**
-     * Get villeLatitudeGrd
+     * Get latitudeGrd
      *
      * @return string
      */
-    public function getVilleLatitudeGrd()
+    public function getLatitudeGrd()
     {
-        return $this->villeLatitudeGrd;
+        return $this->latitudeGrd;
     }
 
     /**
-     * Set villeLongitudeDms
+     * Set longitudeDms
      *
-     * @param string $villeLongitudeDms
+     * @param string $longitudeDms
      *
      * @return Ville
      */
-    public function setVilleLongitudeDms($villeLongitudeDms)
+    public function setLongitudeDms($longitudeDms)
     {
-        $this->villeLongitudeDms = $villeLongitudeDms;
+        $this->longitudeDms = $longitudeDms;
 
         return $this;
     }
 
     /**
-     * Get villeLongitudeDms
+     * Get longitudeDms
      *
      * @return string
      */
-    public function getVilleLongitudeDms()
+    public function getLongitudeDms()
     {
-        return $this->villeLongitudeDms;
+        return $this->longitudeDms;
     }
 
     /**
-     * Set villeLatitudeDms
+     * Set latitudeDms
      *
-     * @param string $villeLatitudeDms
+     * @param string $latitudeDms
      *
      * @return Ville
      */
-    public function setVilleLatitudeDms($villeLatitudeDms)
+    public function setLatitudeDms($latitudeDms)
     {
-        $this->villeLatitudeDms = $villeLatitudeDms;
+        $this->latitudeDms = $latitudeDms;
 
         return $this;
     }
 
     /**
-     * Get villeLatitudeDms
+     * Get latitudeDms
      *
      * @return string
      */
-    public function getVilleLatitudeDms()
+    public function getLatitudeDms()
     {
-        return $this->villeLatitudeDms;
+        return $this->latitudeDms;
     }
 
     /**
-     * Set villeZmin
+     * Set zmin
      *
-     * @param integer $villeZmin
+     * @param integer $zmin
      *
      * @return Ville
      */
-    public function setVilleZmin($villeZmin)
+    public function setZmin($zmin)
     {
-        $this->villeZmin = $villeZmin;
+        $this->zmin = $zmin;
 
         return $this;
     }
 
     /**
-     * Get villeZmin
+     * Get zmin
      *
-     * @return integer
+     * @return int
      */
-    public function getVilleZmin()
+    public function getZmin()
     {
-        return $this->villeZmin;
-    }
-
-    /**
-     * Set villeZmax
-     *
-     * @param integer $villeZmax
-     *
-     * @return Ville
-     */
-    public function setVilleZmax($villeZmax)
-    {
-        $this->villeZmax = $villeZmax;
-
-        return $this;
-    }
-
-    /**
-     * Get villeZmax
-     *
-     * @return integer
-     */
-    public function getVilleZmax()
-    {
-        return $this->villeZmax;
+        return $this->zmin;
     }
 }

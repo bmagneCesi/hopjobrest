@@ -7,70 +7,62 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ReponseAnnonce
  *
- * @ORM\Table(name="reponse_annonce", indexes={@ORM\Index(name="fk_reponse_annonce_annonce1_idx", columns={"annonce_id_annonce"}), @ORM\Index(name="fk_reponse_annonce_utilisateur1_idx", columns={"utilisateur_id_utilisateur"}), @ORM\Index(name="fk_reponse_annonce_utilisateur2_idx", columns={"utilisateur_id_utilisateur1"})})
+ * @ORM\Table(name="reponse_annonce")
  * @ORM\Entity
  */
 class ReponseAnnonce
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur1;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=45, nullable=true)
+     * @ORM\Column(name="code", type="string", length=255)
      */
     private $code;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaire", type="string", length=45, nullable=true)
+     * @ORM\Column(name="commentaire", type="string", length=255)
      */
     private $commentaire;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="statut_paiement", type="boolean", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Annonce")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $statutPaiement;
+    private $annonce;
+
 
     /**
-     * @var boolean
+     * Get id
      *
-     * @ORM\Column(name="validation", type="boolean", nullable=true)
+     * @return int
      */
-    private $validation;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="annonce_id_annonce", type="integer", nullable=false)
-     */
-    private $annonceIdAnnonce;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="utilisateur_id_utilisateur", type="integer", nullable=false)
-     */
-    private $utilisateurIdUtilisateur;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="utilisateur_id_utilisateur1", type="integer", nullable=false)
-     */
-    private $utilisateurIdUtilisateur1;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_reponse_annonce", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idReponseAnnonce;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set code
@@ -119,6 +111,20 @@ class ReponseAnnonce
     {
         return $this->commentaire;
     }
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="statut_paiement", type="boolean")
+     */
+    private $statutPaiement;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="validation", type="boolean")
+     */
+    private $validation;
+
 
     /**
      * Set statutPaiement
@@ -137,7 +143,7 @@ class ReponseAnnonce
     /**
      * Get statutPaiement
      *
-     * @return boolean
+     * @return bool
      */
     public function getStatutPaiement()
     {
@@ -169,171 +175,98 @@ class ReponseAnnonce
     }
 
     /**
-     * Set annonceIdAnnonce
+     * Set idUtilisateur1
      *
-     * @param integer $annonceIdAnnonce
+     * @param integer $idUtilisateur1
      *
      * @return ReponseAnnonce
      */
-    public function setAnnonceIdAnnonce($annonceIdAnnonce)
+    public function setIdUtilisateur1($idUtilisateur1)
     {
-        $this->annonceIdAnnonce = $annonceIdAnnonce;
+        $this->idUtilisateur1 = $idUtilisateur1;
 
         return $this;
     }
 
     /**
-     * Get annonceIdAnnonce
+     * Get idUtilisateur1
      *
      * @return integer
      */
-    public function getAnnonceIdAnnonce()
+    public function getIdUtilisateur1()
     {
-        return $this->annonceIdAnnonce;
+        return $this->idUtilisateur1;
     }
 
     /**
-     * Set utilisateurIdUtilisateur
+     * Set utilisateur
      *
-     * @param integer $utilisateurIdUtilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return ReponseAnnonce
      */
-    public function setUtilisateurIdUtilisateur($utilisateurIdUtilisateur)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurIdUtilisateur = $utilisateurIdUtilisateur;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurIdUtilisateur
-     *
-     * @return integer
-     */
-    public function getUtilisateurIdUtilisateur()
-    {
-        return $this->utilisateurIdUtilisateur;
-    }
-
-    /**
-     * Set utilisateurIdUtilisateur1
-     *
-     * @param integer $utilisateurIdUtilisateur1
-     *
-     * @return ReponseAnnonce
-     */
-    public function setUtilisateurIdUtilisateur1($utilisateurIdUtilisateur1)
-    {
-        $this->utilisateurIdUtilisateur1 = $utilisateurIdUtilisateur1;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateurIdUtilisateur1
-     *
-     * @return integer
-     */
-    public function getUtilisateurIdUtilisateur1()
-    {
-        return $this->utilisateurIdUtilisateur1;
-    }
-
-    /**
-     * Get idReponseAnnonce
-     *
-     * @return integer
-     */
-    public function getIdReponseAnnonce()
-    {
-        return $this->idReponseAnnonce;
-    }
-    /**
-     * @var \AppBundle\Entity\Utilisateur
-     */
-    private $utilisateurUtilisateur1;
-
-    /**
-     * @var \AppBundle\Entity\Utilisateur
-     */
-    private $utilisateurUtilisateur;
-
-    /**
-     * @var \AppBundle\Entity\Annonce
-     */
-    private $annonceAnnonce;
-
-
-    /**
-     * Set utilisateurUtilisateur1
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur1
-     *
-     * @return ReponseAnnonce
-     */
-    public function setUtilisateurUtilisateur1(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur1 = null)
-    {
-        $this->utilisateurUtilisateur1 = $utilisateurUtilisateur1;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateurUtilisateur1
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur1()
+    public function getUtilisateur()
     {
-        return $this->utilisateurUtilisateur1;
+        return $this->utilisateur;
     }
 
     /**
-     * Set utilisateurUtilisateur
+     * Set utilisateur1
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateur1
      *
      * @return ReponseAnnonce
      */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
+    public function setUtilisateur1(\AppBundle\Entity\Utilisateur $utilisateur1)
     {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
+        $this->utilisateur1 = $utilisateur1;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur
+     * Get utilisateur1
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur()
+    public function getUtilisateur1()
     {
-        return $this->utilisateurUtilisateur;
+        return $this->utilisateur1;
     }
 
     /**
-     * Set annonceAnnonce
+     * Set annonce
      *
-     * @param \AppBundle\Entity\Annonce $annonceAnnonce
+     * @param \AppBundle\Entity\Annonce $annonce
      *
      * @return ReponseAnnonce
      */
-    public function setAnnonceAnnonce(\AppBundle\Entity\Annonce $annonceAnnonce = null)
+    public function setAnnonce(\AppBundle\Entity\Annonce $annonce)
     {
-        $this->annonceAnnonce = $annonceAnnonce;
+        $this->annonce = $annonce;
 
         return $this;
     }
 
     /**
-     * Get annonceAnnonce
+     * Get annonce
      *
      * @return \AppBundle\Entity\Annonce
      */
-    public function getAnnonceAnnonce()
+    public function getAnnonce()
     {
-        return $this->annonceAnnonce;
+        return $this->annonce;
     }
 }

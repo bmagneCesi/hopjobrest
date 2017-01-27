@@ -119,7 +119,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 not_annonces_list:
 
                 // annonce_id
-                if (preg_match('#^/annonces/(?P<annonce_id>\\d+)$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/annonces/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
                     if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                         $allow = array_merge($allow, array('GET', 'HEAD'));
                         goto not_annonce_id;
@@ -177,7 +177,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             not_utilisateurs_list:
 
             // utilisateur_id
-            if (preg_match('#^/utilisateurs/(?P<utilisateur_id>\\d+)$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/utilisateurs/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                     $allow = array_merge($allow, array('GET', 'HEAD'));
                     goto not_utilisateur_id;
@@ -189,17 +189,39 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // attestation_id
+        if (0 === strpos($pathinfo, '/documents') && preg_match('#^/documents/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_attestation_id;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'attestation_id')), array (  '_controller' => 'AppBundle\\Controller\\UtilisateurController::getUtilisateurByIdWithDocumentsAction',));
+        }
+        not_attestation_id:
+
+        // factures_id
+        if (0 === strpos($pathinfo, '/factures') && preg_match('#^/factures/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_factures_id;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'factures_id')), array (  '_controller' => 'AppBundle\\Controller\\UtilisateurController::getUtilisateurByIdWithFacturesAction',));
+        }
+        not_factures_id:
+
         if (0 === strpos($pathinfo, '/a')) {
-            // idUtilisateur
-            if (0 === strpos($pathinfo, '/attestations') && preg_match('#^/attestations/(?P<idUtilisateur>\\d+)$#s', $pathinfo, $matches)) {
+            // attestations_id
+            if (0 === strpos($pathinfo, '/attestations') && preg_match('#^/attestations/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                     $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_idUtilisateur;
+                    goto not_attestations_id;
                 }
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'idUtilisateur')), array (  '_controller' => 'AppBundle\\Controller\\UtilisateurController::getUtilisateurByIdWithAttestationsAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'attestations_id')), array (  '_controller' => 'AppBundle\\Controller\\UtilisateurController::getUtilisateurByIdWithAttestationsAction',));
             }
-            not_idUtilisateur:
+            not_attestations_id:
 
             // app_utilisateur_postutilisateurs
             if ($pathinfo === '/addutilisateurs') {
@@ -216,7 +238,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         if (0 === strpos($pathinfo, '/utilisateur')) {
             // app_utilisateur_updateutilisateur
-            if (preg_match('#^/utilisateur/(?P<idUtilisateur>[^/]++)$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/utilisateur/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 if ($this->context->getMethod() != 'PUT') {
                     $allow[] = 'PUT';
                     goto not_app_utilisateur_updateutilisateur;
@@ -227,7 +249,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             not_app_utilisateur_updateutilisateur:
 
             // app_utilisateur_delete
-            if (preg_match('#^/utilisateur/(?P<idUtilisateur>[^/]++)$#s', $pathinfo, $matches)) {
+            if (preg_match('#^/utilisateur/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 if ($this->context->getMethod() != 'DELETE') {
                     $allow[] = 'DELETE';
                     goto not_app_utilisateur_delete;
@@ -238,6 +260,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             not_app_utilisateur_delete:
 
         }
+
+        // id
+        if (0 === strpos($pathinfo, '/missions') && preg_match('#^/missions/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_id;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'id')), array (  '_controller' => 'AppBundle\\Controller\\UtilisateurController::getMissionsByUserAction',));
+        }
+        not_id:
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }

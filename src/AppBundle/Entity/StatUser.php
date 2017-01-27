@@ -7,42 +7,51 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * StatUser
  *
- * @ORM\Table(name="stat_user", indexes={@ORM\Index(name="fk_stat_user_utilisateur1_idx", columns={"utilisateur_id_utilisateur"})})
- * @ORM\Entity
+ * @ORM\Table(name="stat_user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\StatUserRepository")
  */
 class StatUser
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="nb_job", type="integer", nullable=true)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_job", type="integer")
      */
     private $nbJob;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="revenu", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="revenu", type="float")
      */
     private $revenu;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="utilisateur_id_utilisateur", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $utilisateurIdUtilisateur;
+    private $utilisateur;
+
+
 
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id_stat_user", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $idStatUser;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set nbJob
@@ -61,7 +70,7 @@ class StatUser
     /**
      * Get nbJob
      *
-     * @return integer
+     * @return int
      */
     public function getNbJob()
     {
@@ -93,65 +102,26 @@ class StatUser
     }
 
     /**
-     * Set utilisateurIdUtilisateur
+     * Set utilisateur
      *
-     * @param integer $utilisateurIdUtilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return StatUser
      */
-    public function setUtilisateurIdUtilisateur($utilisateurIdUtilisateur)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurIdUtilisateur = $utilisateurIdUtilisateur;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurIdUtilisateur
-     *
-     * @return integer
-     */
-    public function getUtilisateurIdUtilisateur()
-    {
-        return $this->utilisateurIdUtilisateur;
-    }
-
-    /**
-     * Get idStatUser
-     *
-     * @return integer
-     */
-    public function getIdStatUser()
-    {
-        return $this->idStatUser;
-    }
-    /**
-     * @var \AppBundle\Entity\Utilisateur
-     */
-    private $utilisateurUtilisateur;
-
-
-    /**
-     * Set utilisateurUtilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
-     *
-     * @return StatUser
-     */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
-    {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateurUtilisateur
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur()
+    public function getUtilisateur()
     {
-        return $this->utilisateurUtilisateur;
+        return $this->utilisateur;
     }
 }

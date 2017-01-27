@@ -8,7 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\Annonce;
+use AppBundle\Entity\Civilite;
+use AppBundle\Entity\ReponseAnnonce;
 use AppBundle\Entity\Document;
+use AppBundle\Entity\TypeUtilisateur;
+use AppBundle\Entity\Metier;
+use AppBundle\Entity\Domaine;
+use AppBundle\Entity\Ville;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -34,7 +41,7 @@ class UtilisateurController extends Controller
         $formatted = [];
         foreach ($users as $user) {
             $formatted[] = [
-               'idUtilisateur' => $user->getidUtilisateur(),
+               'id' => $user->getId(),
                'nom' => $user->getNom(),
                'prenom' => $user->getPrenom(),
                'mail' => $user->getMail(),
@@ -44,32 +51,33 @@ class UtilisateurController extends Controller
                'password' => $user->getPassword(),
                'description' => $user->getDescription(),
                'moyenne_notation' => $user->getMoyenneNotation(),
-               'civilite_id_civilite' => $user->getCiviliteIdCivilite(),
-               'type_utilisateur_id_type_utilisateur' => $user->getTypeUtilisateurIdTypeUtilisateur(),
-               'ville_id_ville' => $user->getVilleIdVille(),
-               'metier_id_metier' => $user->getMetierIdMetier(),
-               'domaine_id_domaine' => $user->getDomaineIdDomaine(),            ];
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(),            
+               ];
         }
         return new JsonResponse($formatted);
     }
 
     /**
      * Récupère un utilisateur par son id
-     * @Route("/utilisateurs/{utilisateur_id}",requirements={"utilisateur_id" = "\d+"}, name="utilisateur_id")
+     * @Route("/utilisateurs/{id}",requirements={"id" = "\d+"}, name="utilisateur_id")
      * @Method({"GET"})
      */
     public function getUtilisateurByIdAction(Request $request)
     {
         $user = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Utilisateur')
-                ->find($request->get('utilisateur_id'));
+                ->find($request->get('id'));
 
         if (empty($user)) {
             return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
         $formatted[] = [
-               'idUtilisateur' => $user->getidUtilisateur(),
+               'id' => $user->getId(),
                'nom' => $user->getNom(),
                'prenom' => $user->getPrenom(),
                'mail' => $user->getMail(),
@@ -79,11 +87,11 @@ class UtilisateurController extends Controller
                'password' => $user->getPassword(),
                'description' => $user->getDescription(),
                'moyenne_notation' => $user->getMoyenneNotation(),
-               'civilite_id_civilite' => $user->getCiviliteIdCivilite(),
-               'type_utilisateur_id_type_utilisateur' => $user->getTypeUtilisateurIdTypeUtilisateur(),
-               'ville_id_ville' => $user->getVilleIdVille(),
-               'metier_id_metier' => $user->getMetierIdMetier(),
-               'domaine_id_domaine' => $user->getDomaineIdDomaine(),
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(), 
             ];
 
         return new JsonResponse($formatted);
@@ -91,20 +99,20 @@ class UtilisateurController extends Controller
 
     /**
      * Récupère un utilisateur et ses documents par son id
-     * @Route("documents/{idUtilisateur}",requirements={"idUtilisateur" = "\d+"}, name="idUtilisateur")
+     * @Route("documents/{id}",requirements={"id" = "\d+"}, name="attestation_id")
      * @Method({"GET"})
      */
-    public function getUtilisateurByIdWithDocumentsAction($idUtilisateur,Request $request)
+    public function getUtilisateurByIdWithDocumentsAction($id,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('idUtilisateur' => $idUtilisateur ));
-        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateurUtilisateur' => $user ));
-        if (empty($user)) {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('id' => $id ));
+        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateur' => $user ));
+        if (empty($document)) {
+            return new JsonResponse(['message' => 'Document not found'], Response::HTTP_NOT_FOUND);
         }
 
         $formatted[] = [
-               'idUtilisateur' => $user->getidUtilisateur(),
+               'id' => $user->getId(),
                'nom' => $user->getNom(),
                'prenom' => $user->getPrenom(),
                'mail' => $user->getMail(),
@@ -114,35 +122,35 @@ class UtilisateurController extends Controller
                'password' => $user->getPassword(),
                'description' => $user->getDescription(),
                'moyenne_notation' => $user->getMoyenneNotation(),
-               'civilite_id_civilite' => $user->getCiviliteIdCivilite(),
-               'type_utilisateur_id_type_utilisateur' => $user->getTypeUtilisateurIdTypeUtilisateur(),
-               'ville_id_ville' => $user->getVilleIdVille(),
-               'metier_id_metier' => $user->getMetierIdMetier(),
-               'domaine_id_domaine' => $user->getDomaineIdDomaine(),
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(),
                'libelle' => $document->getLibelle(),
                'repertoire' => $document->getRepertoire(),
                'date' => $document->getDate(),
-               'iddocuments' => $document->getIdDocuments(),
+               'id' => $document->getId(),
             ];
 
         return new JsonResponse($formatted);
     }
   /**
      * Récupère un utilisateur et ses factures par son id
-     * @Route("factures/{idUtilisateur}",requirements={"idUtilisateur" = "\d+"}, name="idUtilisateur")
+     * @Route("factures/{id}",requirements={"id" = "\d+"}, name="factures_id")
      * @Method({"GET"})
      */
-  public function getUtilisateurByIdWithFacturesAction($idUtilisateur,Request $request)
+  public function getUtilisateurByIdWithFacturesAction($id,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('idUtilisateur' => $idUtilisateur ));
-        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateurUtilisateur' => $user, 'typeDocumentTypeDocument' => 1));
-        if (empty($user)) {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('id' => $id ));
+        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateur' => $user, 'typeDocument' => 1));
+        if (empty($document)) {
+            return new JsonResponse(['message' => 'Document not found'], Response::HTTP_NOT_FOUND);
         }
 
         $formatted[] = [
-               'idUtilisateur' => $user->getidUtilisateur(),
+               'id' => $user->getId(),
                'nom' => $user->getNom(),
                'prenom' => $user->getPrenom(),
                'mail' => $user->getMail(),
@@ -152,15 +160,15 @@ class UtilisateurController extends Controller
                'password' => $user->getPassword(),
                'description' => $user->getDescription(),
                'moyenne_notation' => $user->getMoyenneNotation(),
-               'civilite_id_civilite' => $user->getCiviliteIdCivilite(),
-               'type_utilisateur_id_type_utilisateur' => $user->getTypeUtilisateurIdTypeUtilisateur(),
-               'ville_id_ville' => $user->getVilleIdVille(),
-               'metier_id_metier' => $user->getMetierIdMetier(),
-               'domaine_id_domaine' => $user->getDomaineIdDomaine(),
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(),
                'libelle' => $document->getLibelle(),
                'repertoire' => $document->getRepertoire(),
                'date' => $document->getDate(),
-               'iddocuments' => $document->getIdDocuments(),
+               'id' => $document->getId(),
             ];
 
         return new JsonResponse($formatted);
@@ -168,20 +176,20 @@ class UtilisateurController extends Controller
 
     /**
      * Récupère un utilisateur et ses attesations par son id
-     * @Route("attestations/{idUtilisateur}",requirements={"idUtilisateur" = "\d+"}, name="idUtilisateur")
+     * @Route("attestations/{id}",requirements={"id" = "\d+"}, name="attestations_id")
      * @Method({"GET"})
      */
-  public function getUtilisateurByIdWithAttestationsAction($idUtilisateur,Request $request)
+  public function getUtilisateurByIdWithAttestationsAction($id,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('idUtilisateur' => $idUtilisateur ));
-        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateurUtilisateur' => $user, 'typeDocumentTypeDocument' => 2));
-        if (empty($user)) {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('id' => $id ));
+        $document = $em->getRepository("AppBundle:Document")->findOneBy(array('utilisateur' => $user, 'typeDocument' => 2));
+        if (empty($document)) {
+            return new JsonResponse(['message' => 'Document not found'], Response::HTTP_NOT_FOUND);
         }
 
         $formatted[] = [
-               'idUtilisateur' => $user->getidUtilisateur(),
+               'id' => $user->getId(),
                'nom' => $user->getNom(),
                'prenom' => $user->getPrenom(),
                'mail' => $user->getMail(),
@@ -191,15 +199,15 @@ class UtilisateurController extends Controller
                'password' => $user->getPassword(),
                'description' => $user->getDescription(),
                'moyenne_notation' => $user->getMoyenneNotation(),
-               'civilite_id_civilite' => $user->getCiviliteIdCivilite(),
-               'type_utilisateur_id_type_utilisateur' => $user->getTypeUtilisateurIdTypeUtilisateur(),
-               'ville_id_ville' => $user->getVilleIdVille(),
-               'metier_id_metier' => $user->getMetierIdMetier(),
-               'domaine_id_domaine' => $user->getDomaineIdDomaine(),
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(),
                'libelle' => $document->getLibelle(),
                'repertoire' => $document->getRepertoire(),
                'date' => $document->getDate(),
-               'iddocuments' => $document->getIdDocuments(),
+               'id' => $document->getId(),
             ];
 
         return new JsonResponse($formatted);
@@ -211,8 +219,10 @@ class UtilisateurController extends Controller
   */
  public function postUtilisateursAction(Request $request)
  {
+    $em = $this->getDoctrine()->getManager();
+    
    $data = new Utilisateur;
-   $idUtilisateur = $request->get('idUtilisateur');
+   $id = $request->get('id');
    $nom = $request->get('nom');
    $prenom = $request->get('prenom');
    $mail = $request->get('mail');
@@ -222,12 +232,13 @@ class UtilisateurController extends Controller
    $password = $request->get('password');
    $description = $request->get('description');
    $moyenneNotation = $request->get('moyenneNotation');
-   $civiliteIdCivilite = $request->get('civiliteIdCivilite');
-   $typeUtilisateurIdTypeUtilisateur = $request->get('typeUtilisateurIdTypeUtilisateur');
-   $villeIdVille = $request->get('villeIdVille');
-   $metierIdMetier = $request->get('metierIdMetier');
-   $domaineIdDomaine = $request->get('domaineIdDomaine');
 
+   $civilite = $em->getRepository("AppBundle:Civilite")->findOneBy(array('id' => $request->get('civilite')));
+   $typeUtilisateur = $em->getRepository("AppBundle:TypeUtilisateur")->findOneBy(array('id' => $request->get('typeUtilisateur')));
+   $metier = $em->getRepository("AppBundle:Metier")->findOneBy(array('id' =>$request->get('metier')));
+   $ville = $em->getRepository("AppBundle:Ville")->findOneBy(array('id' =>$request->get('ville')));
+   $domaine = $em->getRepository("AppBundle:Domaine")->findOneBy(array('id' =>$request->get('domaine')));
+  
   $data->setNom($nom);
   $data->setPrenom($prenom);
   $data->setMail($mail);
@@ -237,12 +248,11 @@ class UtilisateurController extends Controller
   $data->setPassword($password);
   $data->setDescription($description);
   $data->setMoyenneNotation($moyenneNotation);
-  $data->setCiviliteIdCivilite($civiliteIdCivilite);
-  $data->setTypeUtilisateurIdTypeUtilisateur($typeUtilisateurIdTypeUtilisateur);
-  $data->setVilleIdVille($villeIdVille);
-  $data->setMetierIdMetier($metierIdMetier);
-  $data->setDomaineIdDomaine($domaineIdDomaine);
-  $em = $this->getDoctrine()->getManager();
+  $data->setCivilite($civilite);
+  $data->setTypeUtilisateur($typeUtilisateur);
+  $data->setVille($ville);
+  $data->setMetier($metier);
+  $data->setDomaine($domaine);  
   $em->persist($data);
   $em->flush();
 
@@ -251,9 +261,9 @@ class UtilisateurController extends Controller
 
 /**
  * Modification d'un utilisateur
- * @Rest\Put("/utilisateur/{idUtilisateur}")
+ * @Rest\Put("/utilisateur/{id}")
  */
- public function updateUtilisateurAction($idUtilisateur,Request $request)
+ public function updateUtilisateurAction($id,Request $request)
  { 
    $data = new Utilisateur;
    $nom = $request->get('nom');
@@ -265,13 +275,14 @@ class UtilisateurController extends Controller
    $password = $request->get('password');
    $description = $request->get('description');
    $moyenneNotation = $request->get('moyenneNotation');
-   $civiliteIdCivilite = $request->get('civiliteIdCivilite');
-   $typeUtilisateurIdTypeUtilisateur = $request->get('typeUtilisateurIdTypeUtilisateur');
-   $villeIdVille = $request->get('villeIdVille');
-   $metierIdMetier = $request->get('metierIdMetier');
-   $domaineIdDomaine = $request->get('domaineIdDomaine');
-   $sn = $this->getDoctrine()->getManager();
-   $utilisateur = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->find($idUtilisateur);
+   
+   $em = $this->getDoctrine()->getManager();
+   $utilisateur = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->find($id);
+   $civilite = $em->getRepository("AppBundle:Civilite")->findOneBy(array('id' => $request->get('civilite')));
+   $typeUtilisateur = $em->getRepository("AppBundle:TypeUtilisateur")->findOneBy(array('id' => $request->get('typeUtilisateur')));
+   $metier = $em->getRepository("AppBundle:Metier")->findOneBy(array('id' =>$request->get('metier')));
+   $ville = $em->getRepository("AppBundle:Ville")->findOneBy(array('id' =>$request->get('ville')));
+   $domaine = $em->getRepository("AppBundle:Domaine")->findOneBy(array('id' =>$request->get('domaine')));
 if (empty($utilisateur)) {
    return new View("user not found", Response::HTTP_NOT_FOUND);
  } 
@@ -285,66 +296,68 @@ else{
   $utilisateur->setPassword($password);
   $utilisateur->setDescription($description);
   $utilisateur->setMoyenneNotation($moyenneNotation);
-  $utilisateur->setCiviliteIdCivilite($civiliteIdCivilite);
-  $utilisateur->setTypeUtilisateurIdTypeUtilisateur($typeUtilisateurIdTypeUtilisateur);
-  $utilisateur->setVilleIdVille($villeIdVille);
-  $utilisateur->setMetierIdMetier($metierIdMetier);
-  $utilisateur->setDomaineIdDomaine($domaineIdDomaine);
-  $sn->flush();
+  $utilisateur->setCivilite($civilite);
+  $utilisateur->setTypeUtilisateur($typeUtilisateur);
+  $utilisateur->setVille($ville);
+  $utilisateur->setMetier($metier);
+  $utilisateur->setDomaine($domaine);
+  $em->flush();
    return new View("User Updated Successfully", Response::HTTP_OK);
  }
 }
 
  /**
  * Suppression d'un utilisateur
- * @Rest\Delete("/utilisateur/{idUtilisateur}")
+ * @Rest\Delete("/utilisateur/{id}")
  */
- public function deleteAction($idUtilisateur)
- {
+public function deleteAction($id)
+{
   $data = new Utilisateur;
   $sn = $this->getDoctrine()->getManager();
-  $utilisateur = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->find($idUtilisateur);
-if (empty($utilisateur)) {
-  return new View("utilisateur not found", Response::HTTP_NOT_FOUND);
- }
- else {
-  $sn->remove($utilisateur);
-  $sn->flush();
- }
+  $utilisateur = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->find($id);
+  if (empty($utilisateur)) 
+  {
+    return new View("utilisateur not found", Response::HTTP_NOT_FOUND);
+  }
+  else 
+  {
+    $sn->remove($utilisateur);
+    $sn->flush();
+  }
   return new View("deleted successfully", Response::HTTP_OK);
- }
+}
 
  /**
      * Recuperer toutes les missions, annonces qu'un utilisateur va devoir réaliser
-     * @Route("missions/{idUtilisateur}",requirements={"idUtilisateur" = "\d+"}, name="idUtilisateur")
+     * @Route("missions/{id}",requirements={"id" = "\d+"}, name="id")
      * @Method({"GET"})
      */
-    public function getMissionsByUserAction($idUtilisateur,Request $request)
+    public function getMissionsByUserAction($id,Request $request)
     {
     $em = $this->getDoctrine()->getManager();
-    $utilisateur = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('idUtilisateur' => $idUtilisateur ));
-        $annonce = $em->getRepository("AppBundle:Annonce")->findOneBy(array('idAnnonce' => $utilisateur ));
-        $reponse = $em->getRepository("AppBundle:ReponseAnnonce")->findOneBy(array('idReponseAnnonce' => $annonce ));
-
-        if (empty($reponse)) {
+    $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('id' => $id ));
+    $reponse = $em->getRepository("AppBundle:ReponseAnnonce")->findOneBy(array('validation' => 1, 'statutPaiement' => 0, 'utilisateur1' => $id));
+    $annonce = $em->getRepository("AppBundle:Annonce")->findOneBy(array()); 
+ if (empty($reponse)) {
             return new JsonResponse(['message' => 'Missions not found'], Response::HTTP_NOT_FOUND);
         }
             $formatted[] = [
-               'idUtilisateur' => $utilisateur->getIdUtilisateur(),
-               'nom' => $utilisateur->getNom(),
-               'prenom' => $utilisateur->getPrenom(),
-               'mail' => $utilisateur->getMail(),
-               'dateNaissance' => $utilisateur->getDateNaissance(),
-               'adresse' => $utilisateur->getAdresse(),
-               'login' => $utilisateur->getLogin(),
-               'description' => $utilisateur->getDescription(),
-               'moyenneNotation' => $utilisateur->getMoyenneNotation(),
-               'civiliteIdCivilite' => $utilisateur->getCiviliteIdCivilite(),
-               'typeUtilisateurIdTypeUtilisateur' => $utilisateur->getTypeUtilisateurIdTypeUtilisateur(),
-               'villeIdVille' => $utilisateur->getVilleIdVille(),
-               'metierIdMetier' => $utilisateur->getMetierIdMetier(),
-               'domaineIdDomaine' => $utilisateur->getDomaineIdDomaine(),
-               'idAnnonce' => $annonce->getIdAnnonce(),
+               'id' => $user->getId(),
+               'nom' => $user->getNom(),
+               'prenom' => $user->getPrenom(),
+               'mail' => $user->getMail(),
+               'date_naissance' => $user->getDateNaissance(),
+               'adresse' => $user->getAdresse(),
+               'login' => $user->getLogin(),
+               'password' => $user->getPassword(),
+               'description' => $user->getDescription(),
+               'moyenne_notation' => $user->getMoyenneNotation(),
+               'civilite' => $user->getCivilite()->getLibelle(),
+               'type_utilisateur' => $user->getTypeUtilisateur()->getLibelle(),
+               'ville' => $user->getVille()->getNomReel(),
+               'metier' => $user->getMetier()->getLibelle(),
+               'domaine' => $user->getDomaine()->getLibelle(),
+               'id' => $annonce->getId(),
                'titre' => $annonce->getTitre(),
                'nbPersonnes' => $annonce->getNbPersonnes(),
                'vehicule' => $annonce->getVehicule(),
@@ -352,20 +365,19 @@ if (empty($utilisateur)) {
                'dateLimite' => $annonce->getDateLimite(),
                'prixTotal' => $annonce->getPrixTotal(),
                'telephone' => $annonce->getTelephone(),
-               'villeVille' => $annonce->getVilleVille()->getIdVille(),
-               'utilisateurUtilisateur' => $annonce->getUtilisateurUtilisateur()->getIdUtilisateur(),
-               'typeVehiculeTypeVehicule' => $annonce->getTypeVehiculeTypeVehicule()->getIdTypeVehicule(),
-               'horaireHoraire' => $annonce->getHoraireHoraire()->getIdHoraire(),
+               'description' => $annonce->getDescription(),
+               'ville' => $annonce->getVille()->getNomReel(),
+               'utilisateur' => $annonce->getUtilisateur()->getId(),
+               'typeVehicule' => $annonce->getTypeVehicule()->getLibelle(),
+               'horaireHoraire' => $annonce->getHoraire()->getLibelle(),
                'code' => $reponse->getCode(),
                'commentaire' => $reponse->getCommentaire(),
-               'idReponseAnnonce' => $reponse->getIdReponseAnnonce(),
+               'idReponseAnnonce' => $reponse->getId(),
                'statutPaiement' => $reponse->getStatutPaiement(),
                'validation' => $reponse->getValidation(),
-               'annonceIdAnnonce' => $reponse->getAnnonceIdAnnonce(),
-               'utilisateurIdUtilisateur' => $reponse->getUtilisateurIdUtilisateur(),
-               'utilisateurIdUtilisateur1' => $reponse->getUtilisateurIdUtilisateur1(),
-
-                      
+               'idAnnonce' => $reponse->getAnnonce()->getId(),
+               'utilisateur' => $reponse->getUtilisateur()->getId(),
+               'utilisateur1' => $reponse->getUtilisateur1()->getId(),    
             ];
         
         return new JsonResponse($formatted);

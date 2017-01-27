@@ -64,10 +64,10 @@ class Domaine extends \AppBundle\Entity\Domaine implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'idDomaine'];
+            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'libelle'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'idDomaine'];
+        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Domaine' . "\0" . 'libelle'];
     }
 
     /**
@@ -176,6 +176,21 @@ class Domaine extends \AppBundle\Entity\Domaine implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setLibelle($libelle)
     {
 
@@ -193,21 +208,6 @@ class Domaine extends \AppBundle\Entity\Domaine implements \Doctrine\ORM\Proxy\P
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLibelle', []);
 
         return parent::getLibelle();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdDomaine()
-    {
-        if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdDomaine();
-        }
-
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdDomaine', []);
-
-        return parent::getIdDomaine();
     }
 
 }

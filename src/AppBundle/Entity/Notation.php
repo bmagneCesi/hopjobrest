@@ -7,45 +7,50 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Notation
  *
- * @ORM\Table(name="notation", indexes={@ORM\Index(name="fk_notation_utilisateur1_idx", columns={"utilisateur_id_utilisateur"})})
- * @ORM\Entity
+ * @ORM\Table(name="notation")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NotationRepository")
  */
 class Notation
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="commentaire", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="commentaire", type="text")
      */
     private $commentaire;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="note", type="integer", nullable=true)
+     * @ORM\Column(name="note", type="integer")
      */
     private $note;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_notation", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idNotation;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur;
+
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur", referencedColumnName="id_utilisateur")
-     * })
+     * @return int
      */
-    private $utilisateurUtilisateur;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set commentaire
@@ -88,7 +93,7 @@ class Notation
     /**
      * Get note
      *
-     * @return integer
+     * @return int
      */
     public function getNote()
     {
@@ -96,36 +101,26 @@ class Notation
     }
 
     /**
-     * Get idNotation
+     * Set utilisateur
      *
-     * @return integer
-     */
-    public function getIdNotation()
-    {
-        return $this->idNotation;
-    }
-
-    /**
-     * Set utilisateurUtilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Notation
      */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur()
+    public function getUtilisateur()
     {
-        return $this->utilisateurUtilisateur;
+        return $this->utilisateur;
     }
 }

@@ -64,10 +64,10 @@ class Metier extends \AppBundle\Entity\Metier implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'idMetier'];
+            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'libelle'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'idMetier'];
+        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Metier' . "\0" . 'libelle'];
     }
 
     /**
@@ -176,6 +176,21 @@ class Metier extends \AppBundle\Entity\Metier implements \Doctrine\ORM\Proxy\Pro
     /**
      * {@inheritDoc}
      */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setLibelle($libelle)
     {
 
@@ -193,21 +208,6 @@ class Metier extends \AppBundle\Entity\Metier implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLibelle', []);
 
         return parent::getLibelle();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdMetier()
-    {
-        if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdMetier();
-        }
-
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdMetier', []);
-
-        return parent::getIdMetier();
     }
 
 }

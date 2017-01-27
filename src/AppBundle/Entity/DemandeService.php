@@ -7,86 +7,83 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DemandeService
  *
- * @ORM\Table(name="demande_service", indexes={@ORM\Index(name="fk_demande_service_activite1_idx", columns={"activite_id_activite"}), @ORM\Index(name="fk_demande_service_utilisateur1_idx", columns={"utilisateur_id_utilisateur"}), @ORM\Index(name="fk_demande_service_annonce1_idx", columns={"annonce_id_annonce"})})
- * @ORM\Entity
+ * @ORM\Table(name="demande_service")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DemandeServiceRepository")
  */
 class DemandeService
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="duree", type="integer", nullable=true)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="taux_horaire", type="integer", nullable=true)
+     * @ORM\Column(name="taux_horaire", type="integer")
      */
     private $tauxHoraire;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="total", type="integer", nullable=true)
+     * @ORM\Column(name="total", type="integer")
      */
     private $total;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut", type="date", nullable=true)
+     * @ORM\Column(name="date_debut", type="date")
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fin", type="date", nullable=true)
+     * @ORM\Column(name="date_fin", type="date")
      */
     private $dateFin;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_demande_service", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idDemandeService;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activite", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $activite;
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur", referencedColumnName="id_utilisateur")
-     * })
-     */
-    private $utilisateurUtilisateur;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Annonce", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $annonce;
 
     /**
-     * @var \AppBundle\Entity\Annonce
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Annonce")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="annonce_id_annonce", referencedColumnName="id_annonce")
-     * })
-     */
-    private $annonceAnnonce;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur;
+
 
     /**
-     * @var \AppBundle\Entity\Activite
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activite")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="activite_id_activite", referencedColumnName="id_activite")
-     * })
+     * @return int
      */
-    private $activiteActivite;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set duree
@@ -105,7 +102,7 @@ class DemandeService
     /**
      * Get duree
      *
-     * @return integer
+     * @return int
      */
     public function getDuree()
     {
@@ -129,7 +126,7 @@ class DemandeService
     /**
      * Get tauxHoraire
      *
-     * @return integer
+     * @return int
      */
     public function getTauxHoraire()
     {
@@ -153,7 +150,7 @@ class DemandeService
     /**
      * Get total
      *
-     * @return integer
+     * @return int
      */
     public function getTotal()
     {
@@ -209,84 +206,74 @@ class DemandeService
     }
 
     /**
-     * Get idDemandeService
+     * Set activite
      *
-     * @return integer
-     */
-    public function getIdDemandeService()
-    {
-        return $this->idDemandeService;
-    }
-
-    /**
-     * Set utilisateurUtilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
+     * @param \AppBundle\Entity\Activite $activite
      *
      * @return DemandeService
      */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
+    public function setActivite(\AppBundle\Entity\Activite $activite)
     {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
+        $this->activite = $activite;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getUtilisateurUtilisateur()
-    {
-        return $this->utilisateurUtilisateur;
-    }
-
-    /**
-     * Set annonceAnnonce
-     *
-     * @param \AppBundle\Entity\Annonce $annonceAnnonce
-     *
-     * @return DemandeService
-     */
-    public function setAnnonceAnnonce(\AppBundle\Entity\Annonce $annonceAnnonce = null)
-    {
-        $this->annonceAnnonce = $annonceAnnonce;
-
-        return $this;
-    }
-
-    /**
-     * Get annonceAnnonce
-     *
-     * @return \AppBundle\Entity\Annonce
-     */
-    public function getAnnonceAnnonce()
-    {
-        return $this->annonceAnnonce;
-    }
-
-    /**
-     * Set activiteActivite
-     *
-     * @param \AppBundle\Entity\Activite $activiteActivite
-     *
-     * @return DemandeService
-     */
-    public function setActiviteActivite(\AppBundle\Entity\Activite $activiteActivite = null)
-    {
-        $this->activiteActivite = $activiteActivite;
-
-        return $this;
-    }
-
-    /**
-     * Get activiteActivite
+     * Get activite
      *
      * @return \AppBundle\Entity\Activite
      */
-    public function getActiviteActivite()
+    public function getActivite()
     {
-        return $this->activiteActivite;
+        return $this->activite;
+    }
+
+    /**
+     * Set annonce
+     *
+     * @param \AppBundle\Entity\Annonce $annonce
+     *
+     * @return DemandeService
+     */
+    public function setAnnonce(\AppBundle\Entity\Annonce $annonce)
+    {
+        $this->annonce = $annonce;
+
+        return $this;
+    }
+
+    /**
+     * Get annonce
+     *
+     * @return \AppBundle\Entity\Annonce
+     */
+    public function getAnnonce()
+    {
+        return $this->annonce;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return DemandeService
+     */
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

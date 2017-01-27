@@ -8,27 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeDocument
  *
  * @ORM\Table(name="type_document")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeDocumentRepository")
  */
 class TypeDocument
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="typeDocument")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
 
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id_type_document", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $idTypeDocument;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set libelle
@@ -52,15 +62,5 @@ class TypeDocument
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Get idTypeDocument
-     *
-     * @return integer
-     */
-    public function getIdTypeDocument()
-    {
-        return $this->idTypeDocument;
     }
 }

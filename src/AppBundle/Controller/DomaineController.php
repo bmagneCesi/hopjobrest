@@ -33,7 +33,7 @@ class DomaineController extends Controller
         $formatted = [];
         foreach ($domaines as $domaine) {
             $formatted[] = [
-               'idDomaine' => $domaine->getIdDomaine(),
+               'id' => $domaine->getId(),
                'libelle' => $domaine->getLibelle(),       
             ];
         }

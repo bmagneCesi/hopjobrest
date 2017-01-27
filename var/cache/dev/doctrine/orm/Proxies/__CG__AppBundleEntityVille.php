@@ -64,10 +64,10 @@ class Ville extends \AppBundle\Entity\Ville implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'idVille', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeDepartement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeSlug', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNom', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomSimple', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomReel', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomSoundex', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomMetaphone', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCodePostal', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCodeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeArrondissement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCanton', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeAmdi', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation2010', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation1999', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation2012', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeDensite2010', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeSurface', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeZmin', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeZmax'];
+            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'departement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'slug', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nom', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomSimple', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomReel', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomSoundex', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'codePostal', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'commune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'codeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'arrondissement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'canton', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'amdi', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'zmin'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'idVille', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeDepartement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeSlug', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNom', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomSimple', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomReel', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomSoundex', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeNomMetaphone', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCodePostal', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCodeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeArrondissement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeCanton', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeAmdi', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation2010', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation1999', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villePopulation2012', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeDensite2010', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeSurface', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLongitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeLatitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeZmin', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'villeZmax'];
+        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'departement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'slug', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nom', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomSimple', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomReel', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'nomSoundex', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'codePostal', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'commune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'codeCommune', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'arrondissement', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'canton', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'amdi', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeDeg', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeGrd', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'longitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'latitudeDms', '' . "\0" . 'AppBundle\\Entity\\Ville' . "\0" . 'zmin'];
     }
 
     /**
@@ -176,588 +176,434 @@ class Ville extends \AppBundle\Entity\Ville implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getIdVille()
+    public function getId()
     {
         if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdVille();
+            return (int)  parent::getId();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdVille', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
 
-        return parent::getIdVille();
+        return parent::getId();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleDepartement($villeDepartement)
+    public function setDepartement($departement)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleDepartement', [$villeDepartement]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDepartement', [$departement]);
 
-        return parent::setVilleDepartement($villeDepartement);
+        return parent::setDepartement($departement);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleDepartement()
+    public function getDepartement()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleDepartement', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDepartement', []);
 
-        return parent::getVilleDepartement();
+        return parent::getDepartement();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleSlug($villeSlug)
+    public function setSlug($slug)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleSlug', [$villeSlug]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSlug', [$slug]);
 
-        return parent::setVilleSlug($villeSlug);
+        return parent::setSlug($slug);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleSlug()
+    public function getSlug()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleSlug', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSlug', []);
 
-        return parent::getVilleSlug();
+        return parent::getSlug();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleNom($villeNom)
+    public function setNom($nom)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleNom', [$villeNom]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNom', [$nom]);
 
-        return parent::setVilleNom($villeNom);
+        return parent::setNom($nom);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleNom()
+    public function getNom()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleNom', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNom', []);
 
-        return parent::getVilleNom();
+        return parent::getNom();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleNomSimple($villeNomSimple)
+    public function setNomSimple($nomSimple)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleNomSimple', [$villeNomSimple]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNomSimple', [$nomSimple]);
 
-        return parent::setVilleNomSimple($villeNomSimple);
+        return parent::setNomSimple($nomSimple);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleNomSimple()
+    public function getNomSimple()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleNomSimple', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNomSimple', []);
 
-        return parent::getVilleNomSimple();
+        return parent::getNomSimple();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleNomReel($villeNomReel)
+    public function setNomReel($nomReel)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleNomReel', [$villeNomReel]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNomReel', [$nomReel]);
 
-        return parent::setVilleNomReel($villeNomReel);
+        return parent::setNomReel($nomReel);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleNomReel()
+    public function getNomReel()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleNomReel', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNomReel', []);
 
-        return parent::getVilleNomReel();
+        return parent::getNomReel();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleNomSoundex($villeNomSoundex)
+    public function setNomSoundex($nomSoundex)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleNomSoundex', [$villeNomSoundex]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNomSoundex', [$nomSoundex]);
 
-        return parent::setVilleNomSoundex($villeNomSoundex);
+        return parent::setNomSoundex($nomSoundex);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleNomSoundex()
+    public function getNomSoundex()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleNomSoundex', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNomSoundex', []);
 
-        return parent::getVilleNomSoundex();
+        return parent::getNomSoundex();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleNomMetaphone($villeNomMetaphone)
+    public function setCodePostal($codePostal)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleNomMetaphone', [$villeNomMetaphone]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCodePostal', [$codePostal]);
 
-        return parent::setVilleNomMetaphone($villeNomMetaphone);
+        return parent::setCodePostal($codePostal);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleNomMetaphone()
+    public function getCodePostal()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleNomMetaphone', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCodePostal', []);
 
-        return parent::getVilleNomMetaphone();
+        return parent::getCodePostal();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleCodePostal($villeCodePostal)
+    public function setCommune($commune)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleCodePostal', [$villeCodePostal]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCommune', [$commune]);
 
-        return parent::setVilleCodePostal($villeCodePostal);
+        return parent::setCommune($commune);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleCodePostal()
+    public function getCommune()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleCodePostal', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommune', []);
 
-        return parent::getVilleCodePostal();
+        return parent::getCommune();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleCommune($villeCommune)
+    public function setCodeCommune($codeCommune)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleCommune', [$villeCommune]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCodeCommune', [$codeCommune]);
 
-        return parent::setVilleCommune($villeCommune);
+        return parent::setCodeCommune($codeCommune);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleCommune()
+    public function getCodeCommune()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleCommune', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCodeCommune', []);
 
-        return parent::getVilleCommune();
+        return parent::getCodeCommune();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleCodeCommune($villeCodeCommune)
+    public function setArrondissement($arrondissement)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleCodeCommune', [$villeCodeCommune]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArrondissement', [$arrondissement]);
 
-        return parent::setVilleCodeCommune($villeCodeCommune);
+        return parent::setArrondissement($arrondissement);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleCodeCommune()
+    public function getArrondissement()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleCodeCommune', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrondissement', []);
 
-        return parent::getVilleCodeCommune();
+        return parent::getArrondissement();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleArrondissement($villeArrondissement)
+    public function setCanton($canton)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleArrondissement', [$villeArrondissement]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCanton', [$canton]);
 
-        return parent::setVilleArrondissement($villeArrondissement);
+        return parent::setCanton($canton);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleArrondissement()
+    public function getCanton()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleArrondissement', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCanton', []);
 
-        return parent::getVilleArrondissement();
+        return parent::getCanton();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleCanton($villeCanton)
+    public function setAmdi($amdi)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleCanton', [$villeCanton]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAmdi', [$amdi]);
 
-        return parent::setVilleCanton($villeCanton);
+        return parent::setAmdi($amdi);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleCanton()
+    public function getAmdi()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleCanton', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAmdi', []);
 
-        return parent::getVilleCanton();
+        return parent::getAmdi();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleAmdi($villeAmdi)
+    public function setLongitudeDeg($longitudeDeg)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleAmdi', [$villeAmdi]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLongitudeDeg', [$longitudeDeg]);
 
-        return parent::setVilleAmdi($villeAmdi);
+        return parent::setLongitudeDeg($longitudeDeg);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleAmdi()
+    public function getLongitudeDeg()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleAmdi', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLongitudeDeg', []);
 
-        return parent::getVilleAmdi();
+        return parent::getLongitudeDeg();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVillePopulation2010($villePopulation2010)
+    public function setLatitudeDeg($latitudeDeg)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVillePopulation2010', [$villePopulation2010]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLatitudeDeg', [$latitudeDeg]);
 
-        return parent::setVillePopulation2010($villePopulation2010);
+        return parent::setLatitudeDeg($latitudeDeg);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVillePopulation2010()
+    public function getLatitudeDeg()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVillePopulation2010', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLatitudeDeg', []);
 
-        return parent::getVillePopulation2010();
+        return parent::getLatitudeDeg();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVillePopulation1999($villePopulation1999)
+    public function setLongitudeGrd($longitudeGrd)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVillePopulation1999', [$villePopulation1999]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLongitudeGrd', [$longitudeGrd]);
 
-        return parent::setVillePopulation1999($villePopulation1999);
+        return parent::setLongitudeGrd($longitudeGrd);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVillePopulation1999()
+    public function getLongitudeGrd()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVillePopulation1999', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLongitudeGrd', []);
 
-        return parent::getVillePopulation1999();
+        return parent::getLongitudeGrd();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVillePopulation2012($villePopulation2012)
+    public function setLatitudeGrd($latitudeGrd)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVillePopulation2012', [$villePopulation2012]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLatitudeGrd', [$latitudeGrd]);
 
-        return parent::setVillePopulation2012($villePopulation2012);
+        return parent::setLatitudeGrd($latitudeGrd);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVillePopulation2012()
+    public function getLatitudeGrd()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVillePopulation2012', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLatitudeGrd', []);
 
-        return parent::getVillePopulation2012();
+        return parent::getLatitudeGrd();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleDensite2010($villeDensite2010)
+    public function setLongitudeDms($longitudeDms)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleDensite2010', [$villeDensite2010]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLongitudeDms', [$longitudeDms]);
 
-        return parent::setVilleDensite2010($villeDensite2010);
+        return parent::setLongitudeDms($longitudeDms);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleDensite2010()
+    public function getLongitudeDms()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleDensite2010', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLongitudeDms', []);
 
-        return parent::getVilleDensite2010();
+        return parent::getLongitudeDms();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleSurface($villeSurface)
+    public function setLatitudeDms($latitudeDms)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleSurface', [$villeSurface]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLatitudeDms', [$latitudeDms]);
 
-        return parent::setVilleSurface($villeSurface);
+        return parent::setLatitudeDms($latitudeDms);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleSurface()
+    public function getLatitudeDms()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleSurface', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLatitudeDms', []);
 
-        return parent::getVilleSurface();
+        return parent::getLatitudeDms();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVilleLongitudeDeg($villeLongitudeDeg)
+    public function setZmin($zmin)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLongitudeDeg', [$villeLongitudeDeg]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setZmin', [$zmin]);
 
-        return parent::setVilleLongitudeDeg($villeLongitudeDeg);
+        return parent::setZmin($zmin);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVilleLongitudeDeg()
+    public function getZmin()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLongitudeDeg', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getZmin', []);
 
-        return parent::getVilleLongitudeDeg();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleLatitudeDeg($villeLatitudeDeg)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLatitudeDeg', [$villeLatitudeDeg]);
-
-        return parent::setVilleLatitudeDeg($villeLatitudeDeg);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleLatitudeDeg()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLatitudeDeg', []);
-
-        return parent::getVilleLatitudeDeg();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleLongitudeGrd($villeLongitudeGrd)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLongitudeGrd', [$villeLongitudeGrd]);
-
-        return parent::setVilleLongitudeGrd($villeLongitudeGrd);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleLongitudeGrd()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLongitudeGrd', []);
-
-        return parent::getVilleLongitudeGrd();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleLatitudeGrd($villeLatitudeGrd)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLatitudeGrd', [$villeLatitudeGrd]);
-
-        return parent::setVilleLatitudeGrd($villeLatitudeGrd);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleLatitudeGrd()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLatitudeGrd', []);
-
-        return parent::getVilleLatitudeGrd();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleLongitudeDms($villeLongitudeDms)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLongitudeDms', [$villeLongitudeDms]);
-
-        return parent::setVilleLongitudeDms($villeLongitudeDms);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleLongitudeDms()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLongitudeDms', []);
-
-        return parent::getVilleLongitudeDms();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleLatitudeDms($villeLatitudeDms)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleLatitudeDms', [$villeLatitudeDms]);
-
-        return parent::setVilleLatitudeDms($villeLatitudeDms);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleLatitudeDms()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleLatitudeDms', []);
-
-        return parent::getVilleLatitudeDms();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleZmin($villeZmin)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleZmin', [$villeZmin]);
-
-        return parent::setVilleZmin($villeZmin);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleZmin()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleZmin', []);
-
-        return parent::getVilleZmin();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVilleZmax($villeZmax)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVilleZmax', [$villeZmax]);
-
-        return parent::setVilleZmax($villeZmax);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVilleZmax()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVilleZmax', []);
-
-        return parent::getVilleZmax();
+        return parent::getZmin();
     }
 
 }

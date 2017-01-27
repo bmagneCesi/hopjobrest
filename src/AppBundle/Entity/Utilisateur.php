@@ -7,123 +7,134 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Utilisateur
  *
- * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="fk_utilisateur_civilite_idx", columns={"civilite_id_civilite"}), @ORM\Index(name="fk_utilisateur_type_utilisateur1_idx", columns={"type_utilisateur_id_type_utilisateur"}), @ORM\Index(name="fk_utilisateur_ville1_idx", columns={"ville_id_ville"}), @ORM\Index(name="fk_utilisateur_metier1_idx", columns={"metier_id_metier"}), @ORM\Index(name="fk_utilisateur_domaine1_idx", columns={"domaine_id_domaine"})})
- * @ORM\Entity
+ * @ORM\Table(name="utilisateur")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
  */
 class Utilisateur
 {
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="nom", type="string", length=45, nullable=true)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\DemandeService", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="utilisateur1")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notation", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Paiement", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ReponseAnnonce", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ReponseAnnonce", mappedBy="utilisateur1")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\StatUser", mappedBy="utilisateur")
      */
-    public $nom;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=45, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    public $prenom;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=45, nullable=true)
+     * @ORM\Column(name="prenom", type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255)
      */
     private $mail;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_naissance", type="datetime", nullable=true)
+     * @ORM\Column(name="date_naissance", type="date")
      */
     private $dateNaissance;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=45, nullable=true)
+     * @ORM\Column(name="adresse", type="string", length=255)
      */
     private $adresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=45, nullable=true)
+     * @ORM\Column(name="login", type="string", length=50)
      */
     private $login;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=45, nullable=true)
+     * @ORM\Column(name="password", type="string", length=50)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="moyenne_notation", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="moyenne_notation", type="float")
      */
     private $moyenneNotation;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="civilite_id_civilite", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Civilite", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $civiliteIdCivilite;
+    private $civilite;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="type_utilisateur_id_type_utilisateur", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Domaine", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $typeUtilisateurIdTypeUtilisateur;
+    private $domaine;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ville_id_ville", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Metier", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $villeIdVille;
+    private $metier;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="metier_id_metier", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TypeUtilisateur", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $metierIdMetier;
+    private $typeUtilisateur;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="domaine_id_domaine", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Ville", inversedBy="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $domaineIdDomaine;
+    private $ville;
+
+
 
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id_utilisateur", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $idUtilisateur;
-/*
- public function __construct($nom, $prenom)
+    public function getId()
     {
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-    }*/
+        return $this->id;
+    }
 
     /**
      * Set nom
@@ -342,284 +353,122 @@ class Utilisateur
     }
 
     /**
-     * Set civiliteIdCivilite
+     * Set civilite
      *
-     * @param integer $civiliteIdCivilite
-     *
-     * @return Utilisateur
-     */
-    public function setCiviliteIdCivilite($civiliteIdCivilite)
-    {
-        $this->civiliteIdCivilite = $civiliteIdCivilite;
-
-        return $this;
-    }
-
-    /**
-     * Get civiliteIdCivilite
-     *
-     * @return integer
-     */
-    public function getCiviliteIdCivilite()
-    {
-        return $this->civiliteIdCivilite;
-    }
-
-    /**
-     * Set typeUtilisateurIdTypeUtilisateur
-     *
-     * @param integer $typeUtilisateurIdTypeUtilisateur
+     * @param \AppBundle\Entity\Civilite $civilite
      *
      * @return Utilisateur
      */
-    public function setTypeUtilisateurIdTypeUtilisateur($typeUtilisateurIdTypeUtilisateur)
+    public function setCivilite(\AppBundle\Entity\Civilite $civilite)
     {
-        $this->typeUtilisateurIdTypeUtilisateur = $typeUtilisateurIdTypeUtilisateur;
+        $this->civilite = $civilite;
 
         return $this;
     }
 
     /**
-     * Get typeUtilisateurIdTypeUtilisateur
-     *
-     * @return integer
-     */
-    public function getTypeUtilisateurIdTypeUtilisateur()
-    {
-        return $this->typeUtilisateurIdTypeUtilisateur;
-    }
-
-    /**
-     * Set villeIdVille
-     *
-     * @param integer $villeIdVille
-     *
-     * @return Utilisateur
-     */
-    public function setVilleIdVille($villeIdVille)
-    {
-        $this->villeIdVille = $villeIdVille;
-
-        return $this;
-    }
-
-    /**
-     * Get villeIdVille
-     *
-     * @return integer
-     */
-    public function getVilleIdVille()
-    {
-        return $this->villeIdVille;
-    }
-
-    /**
-     * Set metierIdMetier
-     *
-     * @param integer $metierIdMetier
-     *
-     * @return Utilisateur
-     */
-    public function setMetierIdMetier($metierIdMetier)
-    {
-        $this->metierIdMetier = $metierIdMetier;
-
-        return $this;
-    }
-
-    /**
-     * Get metierIdMetier
-     *
-     * @return integer
-     */
-    public function getMetierIdMetier()
-    {
-        return $this->metierIdMetier;
-    }
-
-    /**
-     * Set domaineIdDomaine
-     *
-     * @param integer $domaineIdDomaine
-     *
-     * @return Utilisateur
-     */
-    public function setDomaineIdDomaine($domaineIdDomaine)
-    {
-        $this->domaineIdDomaine = $domaineIdDomaine;
-
-        return $this;
-    }
-
-    /**
-     * Get domaineIdDomaine
-     *
-     * @return integer
-     */
-    public function getDomaineIdDomaine()
-    {
-        return $this->domaineIdDomaine;
-    }
-
-    /**
-     * Get idUtilisateur
-     *
-     * @return integer
-     */
-    public function getIdUtilisateur()
-    {
-        return $this->idUtilisateur;
-    }
-    public function setIdUtilisateur($setIdUtilisateur)
-    {
-        $this->setIdUtilisateur = $setIdUtilisateur;
-
-        return $this;
-    }
-
-    /**
-     * @var \AppBundle\Entity\Ville
-     */
-    private $villeVille;
-
-    /**
-     * @var \AppBundle\Entity\TypeUtilisateur
-     */
-    private $typeUtilisateurTypeUtilisateur;
-
-    /**
-     * @var \AppBundle\Entity\Metier
-     */
-    private $metierMetier;
-
-    /**
-     * @var \AppBundle\Entity\Domaine
-     */
-    private $domaineDomaine;
-
-    /**
-     * @var \AppBundle\Entity\Civilite
-     */
-    private $civiliteCivilite;
-
-
-    /**
-     * Set villeVille
-     *
-     * @param \AppBundle\Entity\Ville $villeVille
-     *
-     * @return Utilisateur
-     */
-    public function setVilleVille(\AppBundle\Entity\Ville $villeVille = null)
-    {
-        $this->villeVille = $villeVille;
-
-        return $this;
-    }
-
-    /**
-     * Get villeVille
-     *
-     * @return \AppBundle\Entity\Ville
-     */
-    public function getVilleVille()
-    {
-        return $this->villeVille;
-    }
-
-    /**
-     * Set typeUtilisateurTypeUtilisateur
-     *
-     * @param \AppBundle\Entity\TypeUtilisateur $typeUtilisateurTypeUtilisateur
-     *
-     * @return Utilisateur
-     */
-    public function setTypeUtilisateurTypeUtilisateur(\AppBundle\Entity\TypeUtilisateur $typeUtilisateurTypeUtilisateur = null)
-    {
-        $this->typeUtilisateurTypeUtilisateur = $typeUtilisateurTypeUtilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get typeUtilisateurTypeUtilisateur
-     *
-     * @return \AppBundle\Entity\TypeUtilisateur
-     */
-    public function getTypeUtilisateurTypeUtilisateur()
-    {
-        return $this->typeUtilisateurTypeUtilisateur;
-    }
-
-    /**
-     * Set metierMetier
-     *
-     * @param \AppBundle\Entity\Metier $metierMetier
-     *
-     * @return Utilisateur
-     */
-    public function setMetierMetier(\AppBundle\Entity\Metier $metierMetier = null)
-    {
-        $this->metierMetier = $metierMetier;
-
-        return $this;
-    }
-
-    /**
-     * Get metierMetier
-     *
-     * @return \AppBundle\Entity\Metier
-     */
-    public function getMetierMetier()
-    {
-        return $this->metierMetier;
-    }
-
-    /**
-     * Set domaineDomaine
-     *
-     * @param \AppBundle\Entity\Domaine $domaineDomaine
-     *
-     * @return Utilisateur
-     */
-    public function setDomaineDomaine(\AppBundle\Entity\Domaine $domaineDomaine = null)
-    {
-        $this->domaineDomaine = $domaineDomaine;
-
-        return $this;
-    }
-
-    /**
-     * Get domaineDomaine
-     *
-     * @return \AppBundle\Entity\Domaine
-     */
-    public function getDomaineDomaine()
-    {
-        return $this->domaineDomaine;
-    }
-
-    /**
-     * Set civiliteCivilite
-     *
-     * @param \AppBundle\Entity\Civilite $civiliteCivilite
-     *
-     * @return Utilisateur
-     */
-    public function setCiviliteCivilite(\AppBundle\Entity\Civilite $civiliteCivilite = null)
-    {
-        $this->civiliteCivilite = $civiliteCivilite;
-
-        return $this;
-    }
-
-    /**
-     * Get civiliteCivilite
+     * Get civilite
      *
      * @return \AppBundle\Entity\Civilite
      */
-    public function getCiviliteCivilite()
+    public function getCivilite()
     {
-        return $this->civiliteCivilite;
+        return $this->civilite;
+    }
+
+    /**
+     * Set domaine
+     *
+     * @param \AppBundle\Entity\Domaine $domaine
+     *
+     * @return Utilisateur
+     */
+    public function setDomaine(\AppBundle\Entity\Domaine $domaine)
+    {
+        $this->domaine = $domaine;
+
+        return $this;
+    }
+
+    /**
+     * Get domaine
+     *
+     * @return \AppBundle\Entity\Domaine
+     */
+    public function getDomaine()
+    {
+        return $this->domaine;
+    }
+
+    /**
+     * Set metier
+     *
+     * @param \AppBundle\Entity\Metier $metier
+     *
+     * @return Utilisateur
+     */
+    public function setMetier(\AppBundle\Entity\Metier $metier)
+    {
+        $this->metier = $metier;
+
+        return $this;
+    }
+
+    /**
+     * Get metier
+     *
+     * @return \AppBundle\Entity\Metier
+     */
+    public function getMetier()
+    {
+        return $this->metier;
+    }
+
+    /**
+     * Set typeUtilisateur
+     *
+     * @param \AppBundle\Entity\TypeUtilisateur $typeUtilisateur
+     *
+     * @return Utilisateur
+     */
+    public function setTypeUtilisateur(\AppBundle\Entity\TypeUtilisateur $typeUtilisateur)
+    {
+        $this->typeUtilisateur = $typeUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get typeUtilisateur
+     *
+     * @return \AppBundle\Entity\TypeUtilisateur
+     */
+    public function getTypeUtilisateur()
+    {
+        return $this->typeUtilisateur;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param \AppBundle\Entity\Ville $ville
+     *
+     * @return Utilisateur
+     */
+    public function setVille(\AppBundle\Entity\Ville $ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return \AppBundle\Entity\Ville
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 }

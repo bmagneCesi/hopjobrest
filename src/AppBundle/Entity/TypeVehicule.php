@@ -8,27 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeVehicule
  *
  * @ORM\Table(name="type_vehicule")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeVehiculeRepository")
  */
 class TypeVehicule
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="typeVehicule")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
 
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id_type_vehicule", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $idTypeVehicule;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set libelle
@@ -52,15 +62,5 @@ class TypeVehicule
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Get idTypeVehicule
-     *
-     * @return integer
-     */
-    public function getIdTypeVehicule()
-    {
-        return $this->idTypeVehicule;
     }
 }

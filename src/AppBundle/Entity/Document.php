@@ -7,62 +7,63 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Document
  *
- * @ORM\Table(name="document", indexes={@ORM\Index(name="fk_document_type_document1_idx", columns={"type_document_id_type_document"}), @ORM\Index(name="fk_document_utilisateur1_idx", columns={"utilisateur_id_utilisateur"})})
- * @ORM\Entity
+ * @ORM\Table(name="document")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DocumentRepository")
  */
 class Document
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="repertoire", type="string", length=45, nullable=true)
+     * @ORM\Column(name="repertoire", type="string", length=255)
      */
     private $repertoire;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_documents", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idDocuments;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TypeDocument", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $typeDocument;
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur", referencedColumnName="id_utilisateur")
-     * })
-     */
-    private $utilisateurUtilisateur;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur;
+
 
     /**
-     * @var \AppBundle\Entity\TypeDocument
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TypeDocument")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="type_document_id_type_document", referencedColumnName="id_type_document")
-     * })
+     * @return int
      */
-    private $typeDocumentTypeDocument;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set libelle
@@ -137,60 +138,50 @@ class Document
     }
 
     /**
-     * Get idDocuments
+     * Set typeDocument
      *
-     * @return integer
-     */
-    public function getIdDocuments()
-    {
-        return $this->idDocuments;
-    }
-
-    /**
-     * Set utilisateurUtilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
+     * @param \AppBundle\Entity\TypeDocument $typeDocument
      *
      * @return Document
      */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
+    public function setTypeDocument(\AppBundle\Entity\TypeDocument $typeDocument)
     {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
+        $this->typeDocument = $typeDocument;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getUtilisateurUtilisateur()
-    {
-        return $this->utilisateurUtilisateur;
-    }
-
-    /**
-     * Set typeDocumentTypeDocument
-     *
-     * @param \AppBundle\Entity\TypeDocument $typeDocumentTypeDocument
-     *
-     * @return Document
-     */
-    public function setTypeDocumentTypeDocument(\AppBundle\Entity\TypeDocument $typeDocumentTypeDocument = null)
-    {
-        $this->typeDocumentTypeDocument = $typeDocumentTypeDocument;
-
-        return $this;
-    }
-
-    /**
-     * Get typeDocumentTypeDocument
+     * Get typeDocument
      *
      * @return \AppBundle\Entity\TypeDocument
      */
-    public function getTypeDocumentTypeDocument()
+    public function getTypeDocument()
     {
-        return $this->typeDocumentTypeDocument;
+        return $this->typeDocument;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Document
+     */
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

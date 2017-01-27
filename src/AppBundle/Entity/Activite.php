@@ -7,45 +7,50 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Activite
  *
- * @ORM\Table(name="activite", indexes={@ORM\Index(name="fk_activite_sous_domaine1_idx", columns={"sous_domaine_id_sous_domaine"})})
- * @ORM\Entity
+ * @ORM\Table(name="activite")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ActiviteRepository")
  */
 class Activite
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\DemandeService", mappedBy="activite")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=45)
      */
     private $libelle;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="taux_horaire", type="integer", nullable=true)
+     * @ORM\Column(name="taux_horaire", type="integer")
      */
     private $tauxHoraire;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_activite", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idActivite;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SousDomaine", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $sousDomaine;
 
     /**
-     * @var \AppBundle\Entity\SousDomaine
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SousDomaine")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="sous_domaine_id_sous_domaine", referencedColumnName="id_sous_domaine")
-     * })
+     * @return int
      */
-    private $sousDomaineSousDomaine;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set libelle
@@ -88,7 +93,7 @@ class Activite
     /**
      * Get tauxHoraire
      *
-     * @return integer
+     * @return int
      */
     public function getTauxHoraire()
     {
@@ -96,65 +101,26 @@ class Activite
     }
 
     /**
-     * Get idActivite
+     * Set sousDomaine
      *
-     * @return integer
-     */
-    public function getIdActivite()
-    {
-        return $this->idActivite;
-    }
-
-    /**
-     * Set sousDomaineSousDomaine
-     *
-     * @param \AppBundle\Entity\SousDomaine $sousDomaineSousDomaine
+     * @param \AppBundle\Entity\SousDomaine $sousDomaine
      *
      * @return Activite
      */
-    public function setSousDomaineSousDomaine(\AppBundle\Entity\SousDomaine $sousDomaineSousDomaine = null)
+    public function setSousDomaine(\AppBundle\Entity\SousDomaine $sousDomaine)
     {
-        $this->sousDomaineSousDomaine = $sousDomaineSousDomaine;
+        $this->sousDomaine = $sousDomaine;
 
         return $this;
     }
 
     /**
-     * Get sousDomaineSousDomaine
+     * Get sousDomaine
      *
      * @return \AppBundle\Entity\SousDomaine
      */
-    public function getSousDomaineSousDomaine()
+    public function getSousDomaine()
     {
-        return $this->sousDomaineSousDomaine;
-    }
-    /**
-     * @var integer
-     */
-    private $domaineIdDomaine;
-
-
-    /**
-     * Set domaineIdDomaine
-     *
-     * @param integer $domaineIdDomaine
-     *
-     * @return Activite
-     */
-    public function setDomaineIdDomaine($domaineIdDomaine)
-    {
-        $this->domaineIdDomaine = $domaineIdDomaine;
-
-        return $this;
-    }
-
-    /**
-     * Get domaineIdDomaine
-     *
-     * @return integer
-     */
-    public function getDomaineIdDomaine()
-    {
-        return $this->domaineIdDomaine;
+        return $this->sousDomaine;
     }
 }

@@ -64,10 +64,10 @@ class Civilite extends \AppBundle\Entity\Civilite implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'idCivilite'];
+            return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'libelle'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'libelle', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'idCivilite'];
+        return ['__isInitialized__', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'id', '' . "\0" . 'AppBundle\\Entity\\Civilite' . "\0" . 'libelle'];
     }
 
     /**
@@ -176,6 +176,21 @@ class Civilite extends \AppBundle\Entity\Civilite implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setLibelle($libelle)
     {
 
@@ -193,21 +208,6 @@ class Civilite extends \AppBundle\Entity\Civilite implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLibelle', []);
 
         return parent::getLibelle();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIdCivilite()
-    {
-        if ($this->__isInitialized__ === false) {
-            return (int)  parent::getIdCivilite();
-        }
-
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIdCivilite', []);
-
-        return parent::getIdCivilite();
     }
 
 }

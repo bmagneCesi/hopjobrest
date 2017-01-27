@@ -7,55 +7,56 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Message
  *
- * @ORM\Table(name="message", indexes={@ORM\Index(name="fk_message_utilisateur1_idx", columns={"utilisateur_id_utilisateur"}), @ORM\Index(name="fk_message_utilisateur2_idx", columns={"utilisateur_id_utilisateur1"})})
- * @ORM\Entity
+ * @ORM\Table(name="message")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
  */
 class Message
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=45, nullable=true)
+     * @ORM\Column(name="contenu", type="string", length=255)
      */
     private $contenu;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="date", type="string", length=45, nullable=true)
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_message", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idMessage;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur;
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur1", referencedColumnName="id_utilisateur")
-     * })
-     */
-    private $utilisateurUtilisateur1;
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="id")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $utilisateur1;
+
 
     /**
-     * @var \AppBundle\Entity\Utilisateur
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="utilisateur_id_utilisateur", referencedColumnName="id_utilisateur")
-     * })
+     * @return int
      */
-    private $utilisateurUtilisateur;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set contenu
@@ -84,7 +85,7 @@ class Message
     /**
      * Set date
      *
-     * @param string $date
+     * @param \DateTime $date
      *
      * @return Message
      */
@@ -98,7 +99,7 @@ class Message
     /**
      * Get date
      *
-     * @return string
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -106,60 +107,50 @@ class Message
     }
 
     /**
-     * Get idMessage
+     * Set utilisateur
      *
-     * @return integer
-     */
-    public function getIdMessage()
-    {
-        return $this->idMessage;
-    }
-
-    /**
-     * Set utilisateurUtilisateur1
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur1
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Message
      */
-    public function setUtilisateurUtilisateur1(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur1 = null)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurUtilisateur1 = $utilisateurUtilisateur1;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur1
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur1()
+    public function getUtilisateur()
     {
-        return $this->utilisateurUtilisateur1;
+        return $this->utilisateur;
     }
 
     /**
-     * Set utilisateurUtilisateur
+     * Set utilisateur1
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurUtilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateur1
      *
      * @return Message
      */
-    public function setUtilisateurUtilisateur(\AppBundle\Entity\Utilisateur $utilisateurUtilisateur = null)
+    public function setUtilisateur1(\AppBundle\Entity\Utilisateur $utilisateur1)
     {
-        $this->utilisateurUtilisateur = $utilisateurUtilisateur;
+        $this->utilisateur1 = $utilisateur1;
 
         return $this;
     }
 
     /**
-     * Get utilisateurUtilisateur
+     * Get utilisateur1
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurUtilisateur()
+    public function getUtilisateur1()
     {
-        return $this->utilisateurUtilisateur;
+        return $this->utilisateur1;
     }
 }

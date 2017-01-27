@@ -8,27 +8,39 @@ use Doctrine\ORM\Mapping as ORM;
  * Domaine
  *
  * @ORM\Table(name="domaine")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DomaineRepository")
  */
 class Domaine
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\SousDomaine", mappedBy="domaine")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Utilisateur", mappedBy="domaine")
+     */
+    private $id;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
      */
     private $libelle;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id_domaine", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $idDomaine;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set libelle
@@ -52,15 +64,5 @@ class Domaine
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Get idDomaine
-     *
-     * @return integer
-     */
-    public function getIdDomaine()
-    {
-        return $this->idDomaine;
     }
 }
